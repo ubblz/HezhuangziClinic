@@ -30,5 +30,18 @@
 
   <build>
     <finalName>HezhuangziClinic</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <port>8081</port>
+          <path>/hezhuangzi</path>
+          <server>tomcat7</server>
+          <uriEncoding>UTF-8</uriEncoding>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
