@@ -5,17 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.hezhuangzi</groupId>
-  <artifactId>HezhuangziClinic</artifactId>
+  <artifactId>clinic_web</artifactId>
   <version>1.0</version>
-  <modules>
-    <module>patient_web</module>
-    <module>clinic_web</module>
-    <module>dao</module>
-    <module>service</module>
-  </modules>
-  <packaging>pom</packaging>
+  <packaging>war</packaging>
 
-  <name>HezhuangziClinic Maven Webapp</name>
+  <name>clinic_web Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -26,25 +20,15 @@
   </properties>
 
   <dependencies>
-    <!-- 安装servlet api 的依赖 -->
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
+      <groupId>com.hezhuangzi</groupId>
+      <artifactId>service</artifactId>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>HezhuangziClinic</finalName>
+    <finalName>clinic_web</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -52,7 +36,7 @@
         <version>2.2</version>
         <configuration>
           <port>8081</port>
-          <path>/hezhuangzi</path>
+          <path>/clinic</path>
           <server>tomcat7</server>
           <uriEncoding>UTF-8</uriEncoding>
         </configuration>
