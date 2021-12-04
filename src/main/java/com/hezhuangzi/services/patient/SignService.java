@@ -1,21 +1,23 @@
 package com.hezhuangzi.services.patient;
 
+import com.hezhuangzi.dao.PatientSignDao;
+
 import java.sql.SQLException;
 
 public class SignService {
-//    private static MyDBUtils myDBUtils = new MyDBUtils();
-//
-//    public static boolean signUp(String phone, String pwd){
-//        try {
-//            myDBUtils.patientSignUp(phone,pwd);
-//            return true;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
+    private PatientSignDao patientSignDao = new PatientSignDao();
 
-//    public static boolean signIn(String phone ,String pwd){
-//
-//    }
+    public boolean patientSignUp(String phone, String pwd){
+        try {
+            patientSignDao.patientSignUp(phone,pwd);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean signIn(String phone ,String pwd){
+        return true;
+    }
 }

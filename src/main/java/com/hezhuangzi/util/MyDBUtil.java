@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBUtil {
+public class MyDBUtil {
 
     private static String JDBC_Driver,DBNAME,JDBC_URI,USER,PWD;
     static{
@@ -28,7 +28,4 @@ public class DBUtil {
         }
         return conn;
     }
-
-
-
 }

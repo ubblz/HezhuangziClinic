@@ -1,6 +1,6 @@
+com/hezhuangzi/dao/PatientSignDao.class
 com/hezhuangzi/servlet/LoginServlet.class
-com/hezhuangzi/util/DBUtil.class
-com/hezhuangzi/dao/PatientUserDao.class
+com/hezhuangzi/util/MyDBUtil.class
 com/hezhuangzi/entity/PatientInfo.class
 com/hezhuangzi/entity/ClinicWorker.class
 com/hezhuangzi/util/OtherUtils.class

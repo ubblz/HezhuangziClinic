@@ -1,4 +1,4 @@
-package com.hezhuangzi.servlet;
+package com.hezhuangzi.servlet.patient;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

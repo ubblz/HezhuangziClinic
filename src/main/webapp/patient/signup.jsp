@@ -12,7 +12,7 @@
     <title>用户注册</title>
 </head>
 <body>
-    <form method="post" action="SignUp">
+    <form method="post" action="../SignUp">
         手机号：<input type="text" name="phone"/><br>
         密码：<input type="text" name="pwd"/><br>
         确认密码：<input type="text" name="rpwd"/><br>

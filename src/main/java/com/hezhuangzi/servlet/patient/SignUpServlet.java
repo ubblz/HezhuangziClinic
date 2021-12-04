@@ -1,5 +1,7 @@
-package com.hezhuangzi.servlet;
+package com.hezhuangzi.servlet.patient;
 
+
+import com.hezhuangzi.services.patient.SignService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,17 +15,18 @@ import java.io.PrintWriter;
 public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SignService signService = new SignService();
         resp.setContentType("text/html;charset=UTF-8");
+
         PrintWriter out = resp.getWriter();
         String phone = req.getParameter("phone");
         String pwd = req.getParameter("pwd");
-//        boolean success = SignService.signUp(phone,pwd);
-//        if(success){
-//            out.println("注册成功！");
-//        }
-//        else
-//        {
-//            out.println("注册失败！");
-//        }
+
+        boolean success = signService.patientSignUp(phone,pwd);
+        if(success){
+            out.println("注册成功！");
+        }else{
+            out.println("注册失败！");
+        }
     }
 }

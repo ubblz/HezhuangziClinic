@@ -4,34 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="34cc76eb-8319-44ed-bdab-4444110bacbd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/PatientUserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ClinicWorker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SignService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/LoginServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/SignUpServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/DBUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/OtherUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/signup.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clinic_web/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dao/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient_web/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/src/main/java/com/hezhuangzi/service/ServiceTest.java" beforeDir="false" />
+    <list default="true" id="34cc76eb-8319-44ed-bdab-4444110bacbd" name="Changes" comment="正常运行">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/思路.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/hezhuangzi/test/MyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/PatientUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/PatientSignDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/SignUpServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SignUpServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/DBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/MyDBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/OtherUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/OtherUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/patient/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/patient/signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/dao/PatientUserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/SignService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/SignService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/SignUpServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/SignUpServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/DBUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/OtherUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/OtherUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/tomcat/logs/access_log.2021-12-04" beforeDir="false" afterPath="$PROJECT_DIR$/target/tomcat/logs/access_log.2021-12-04" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,8 +74,27 @@
       <recent name="$PROJECT_DIR$/src/main/webapp" />
       <recent name="$PROJECT_DIR$/src/main/java/com/hezhuangzi" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/patient" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Maven.HezhuangziClinic_run">
+    <configuration name="MyTest.insertPatient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HezhuangziClinic" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hezhuangzi.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hezhuangzi.test" />
+      <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.MyTest" />
+      <option name="METHOD_NAME" value="insertPatient" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HezhuangziClinic_run" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -96,6 +120,15 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Maven.HezhuangziClinic_run" />
+      <item itemvalue="JUnit.MyTest.insertPatient" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MyTest.insertPatient" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -105,8 +138,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1638607931244</updated>
-      <workItem from="1638607933869" duration="345000" />
+      <workItem from="1638607933869" duration="3222000" />
     </task>
+    <task id="LOCAL-00001" summary="分层整理成一个">
+      <created>1638608398906</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1638608398906</updated>
+    </task>
+    <task id="LOCAL-00002" summary="正常运行">
+      <created>1638608479195</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1638608479195</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +170,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="分层整理成一个" />
+    <MESSAGE value="正常运行" />
+    <option name="LAST_COMMIT_MESSAGE" value="正常运行" />
   </component>
 </project>
