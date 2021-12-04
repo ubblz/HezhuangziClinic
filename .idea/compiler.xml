@@ -6,10 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="patient_web" />
-        <module name="dao" />
-        <module name="clinic_web" />
-        <module name="service" />
+        <module name="HezhuangziClinic" />
       </profile>
     </annotationProcessing>
   </component>
