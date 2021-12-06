@@ -93,4 +93,20 @@ public class ClinicWorker {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+    @Override
+    public String toString() {
+        return "ClinicWorker{" +
+                "clinicId='" + clinicId + '\'' +
+                ", name='" + name + '\'' +
+                ", gen='" + gen + '\'' +
+                ", birth=" + birth +
+                ", age=" + age +
+                ", post='" + post + '\'' +
+                ", pic='" + pic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", type='" + type + '\'' +
+                ", pwd='" + pwd + '\'' +
+                '}';
+    }
 }
