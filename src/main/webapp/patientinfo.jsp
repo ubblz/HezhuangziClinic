@@ -78,7 +78,6 @@
         });
     };
 
-
     function subModify(){
         $.ajax({
             url: "modifypatientinfo",

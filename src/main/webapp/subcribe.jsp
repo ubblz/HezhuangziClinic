@@ -29,8 +29,102 @@
     </div>
 <%-- 预约面板 --%>
     <div class="main w">
+        <div class="continer">
+            <form id="form-doctor" action="#"  method="post"  onsubmit="return false">
+                <input type="date" name="date" id="" max="${max}" min="${min}"}>
+                <select name="sector">
+                    <option value="neike">内科</option>
+                    <option value="waike">外科</option>
+                    <option value="erke">儿科</option>
+                    <option value="pifuke">皮肤科</option>
+                    <option value="wuguanke">五官科</option>
+                </select>
+                <select name="time">
+                    <option value="am">上午</option>
+                    <option value="pm">下午</option>
+                </select>
+                <input type="text" name="test">
+                <br>
+                <input type="button" value="查询" onclick="selectDoctor()">
+            </form>
+            <div id="doctor-list">
 
+            </div>
+
+            <button type="button" onclick="subcribe()">预约</button>
+        </div>
     </div>
 </div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    var arrangeId = "";
+
+    function selectDoctor(){
+        $.ajax({
+            url:"selectdoctor",
+            type:"POST",
+            dateType:"JSON",
+            data:$('#form-doctor').serialize(),
+            success:function(result,status,xhr){
+                $(".doctor").remove();
+                var doctors = result.doctors;
+                for(var doc in doctors){
+                    var other = doctors[doc];
+                    $("#doctor-list").append("" +
+                        "<div class='doctor' onclick='chooseDoctor(this)'>" +
+                        "<div>序号：<span>"+other.arrangeId +"</span></div>" +
+                        "<img src='img/pic.png' width='100' height='100' alt=''>" +
+                        "<p>姓名：<span>"+other.cname+"</span></p>" +
+                        "<p>科室：<span>"+other.post+"</span></p>" +
+                        "<p>性别：<span>"+other.gen+"</span></p>" +
+                        "<p>年龄：<span>"+other.age+"</span></p>" +
+                        "<p>挂号数：<span>"+other.subnum+"</span></p>" +
+                        "</div>");
+                }
+            },
+            error:function(error){
+                alert("error");
+            }
+        });
+    }
+
+    function chooseDoctor(obj){
+        var sp = obj.getElementsByTagName("div")[0];
+        var value = sp.getElementsByTagName("span")[0].innerHTML;
+        if(value != arrangeId){
+            obj.className="doctor doctor-border";
+            arrangeId = value;
+        }else{
+            obj.className="doctor doctor-not-border";
+            arrangeId = "";
+        }
+        console.log(arrangeId);
+    }
+
+    function subcribe(){
+        if(arrangeId === ""){
+            alert("选择医生");
+        }else {
+            $.ajax({
+                url: "subdoctor",
+                type: "POST",
+                data: {"arrangeId": arrangeId,},
+                dataType: "JSON",
+                success: function(res) {
+                    if(res.result == 1){
+                        alert("预约成功！");
+                    }else{
+                        alert("预约失败！");
+                    }
+                },
+                error: function(err) {
+                    alert("出现错误！");
+                }
+            });
+        }
+    }
+
+</script>
 </body>
 </html>
