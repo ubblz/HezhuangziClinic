@@ -1,10 +1,7 @@
 package com.hezhuangzi.test;
 
 import com.hezhuangzi.dao.PatientDao;
-import com.hezhuangzi.entity.ArragneDoctor;
-import com.hezhuangzi.entity.ChooseDoctor;
-import com.hezhuangzi.entity.ClinicWorker;
-import com.hezhuangzi.entity.MinMaxDate;
+import com.hezhuangzi.entity.*;
 import com.hezhuangzi.util.OtherUtils;
 import com.mysql.cj.xdevapi.SchemaImpl;
 import org.junit.Test;
@@ -69,8 +66,13 @@ public class MyTest {
         System.out.println(worker);
     }
     @Test
-    public  void  test(){
-        System.out.println(OtherUtils.subcribeNum().length());
-
+    public  void  test() throws SQLException {
+        System.out.println(new Date());
+    }
+    @Test
+    public void queryBreakTime() throws SQLException {
+        PatientDao dao = new PatientDao();
+        boolean p211204173202 = dao.queryAlreaySubcribe("p211204173202");
+        System.out.println(p211204173202);
     }
 }

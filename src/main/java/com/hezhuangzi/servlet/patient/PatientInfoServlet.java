@@ -15,16 +15,8 @@ import java.sql.SQLException;
 public class PatientInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PatientDao dao = new PatientDao();
-        HttpSession session = request.getSession();
-        String phone = (String) session.getAttribute("phone");
-        try {
-            PatientInfo userInfo = dao.getPatientInfo(phone);
-            request.setAttribute("user",userInfo);
-            request.getRequestDispatcher("patientinfo.jsp").forward(request,response);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PatientService service = new PatientService();
+        service.displayPatientInfo(request,response);
     }
 
     @Override

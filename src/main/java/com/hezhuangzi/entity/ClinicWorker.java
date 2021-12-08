@@ -4,14 +4,39 @@ import java.util.Date;
 
 public class ClinicWorker {
     private String clinicId;
-    private String name;
     private String gen;
+    private String cname;
     private Date birth;
     private Integer age;
     private String post;
     private String pic;
     private String phone;
-    private String type;
+    private String typ;
+
+    @Override
+    public String toString() {
+        return "ClinicWorker{" +
+                "clinicId='" + clinicId + '\'' +
+                ", gen='" + gen + '\'' +
+                ", cname='" + cname + '\'' +
+                ", birth=" + birth +
+                ", age=" + age +
+                ", post='" + post + '\'' +
+                ", pic='" + pic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", typ='" + typ + '\'' +
+                ", pwd='" + pwd + '\'' +
+                '}';
+    }
+
+    public String getTyp() {
+        return typ;
+    }
+
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
     private String pwd;
 
     public String getClinicId() {
@@ -22,13 +47,6 @@ public class ClinicWorker {
         this.clinicId = clinicId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getGen() {
         return gen;
@@ -78,13 +96,6 @@ public class ClinicWorker {
         this.phone = phone;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getPwd() {
         return pwd;
@@ -94,19 +105,11 @@ public class ClinicWorker {
         this.pwd = pwd;
     }
 
-    @Override
-    public String toString() {
-        return "ClinicWorker{" +
-                "clinicId='" + clinicId + '\'' +
-                ", name='" + name + '\'' +
-                ", gen='" + gen + '\'' +
-                ", birth=" + birth +
-                ", age=" + age +
-                ", post='" + post + '\'' +
-                ", pic='" + pic + '\'' +
-                ", phone='" + phone + '\'' +
-                ", type='" + type + '\'' +
-                ", pwd='" + pwd + '\'' +
-                '}';
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
     }
 }
