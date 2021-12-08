@@ -1,5 +1,5 @@
 <%@ page isELIgnored="false" %>
-<jsp:useBean id="user" scope="request" type="com.hezhuangzi.entity.PatientInfo"/>
+<%--<jsp:useBean id="user" scope="request" type="com.hezhuangzi.entity.PatientInfo"/>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -32,13 +32,13 @@
     <div class="main w">
         <div class="left-info ">
             <%--            <p>${empty user}</p>--%>
-            <p>编号:<span>${user.patientId}</span> </p>
-            <p>姓名:<span id="uname">${user.name}</span>  </p>
-            <p>性别:<span id="ugen"> ${user.gen}</span> </p>
-            <p>年龄:<span id="uage">${user.age}</span>  </p>
-            <p>身份证:<span id="uicard">${user.icard}</span>  </p>
-            <p>手机号码:<span id="uphone"> ${user.phone}</span> </p>
-            <p>邮箱:<span id="uemail"> ${user.email}</span> </p>
+            <p>编号:<span>${patientInfo.patientId}</span> </p>
+            <p>姓名:<span id="uname">${patientInfo.name}</span>  </p>
+            <p>性别:<span id="ugen"> ${patientInfo.gen}</span> </p>
+            <p>年龄:<span id="uage">${patientInfo.age}</span>  </p>
+            <p>身份证:<span id="uicard">${patientInfo.icard}</span>  </p>
+            <p>手机号码:<span id="uphone"> ${patientInfo.phone}</span> </p>
+            <p>邮箱:<span id="uemail"> ${patientInfo.email}</span> </p>
         </div>
         <div class="right-modify">
             <form id="form-info" action="##" method="post" onsubmit="return false">
@@ -85,7 +85,7 @@
             dataType:"JSON",
             data:$('#form-info').serialize(),
             success: function(res,status,xhr) {
-                alert(res.status);
+                // alert(res.status);
                 displayData()
             },
             error: function(err) {

@@ -43,7 +43,6 @@
                     <option value="am">上午</option>
                     <option value="pm">下午</option>
                 </select>
-                <input type="text" name="test">
                 <br>
                 <input type="button" value="查询" onclick="selectDoctor()">
             </form>
@@ -51,14 +50,14 @@
 
             </div>
 
-            <button type="button" onclick="subcribe()">预约</button>
+<%--            <button type="button" onclick="subcribe()">预约</button>--%>
         </div>
     </div>
 </div>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-    var arrangeId = "";
+    // var arrangeId = "";
 
     function selectDoctor(){
         $.ajax({
@@ -72,14 +71,15 @@
                 for(var doc in doctors){
                     var other = doctors[doc];
                     $("#doctor-list").append("" +
-                        "<div class='doctor' onclick='chooseDoctor(this)'>" +
-                        "<div>序号：<span>"+other.arrangeId +"</span></div>" +
+                        "<div class='doctor' onclick=''>" +
+                        // "<div>序号：<span>"+other.arrangeId +"</span></div>" +
                         "<img src='img/pic.png' width='100' height='100' alt=''>" +
                         "<p>姓名：<span>"+other.cname+"</span></p>" +
                         "<p>科室：<span>"+other.post+"</span></p>" +
                         "<p>性别：<span>"+other.gen+"</span></p>" +
                         "<p>年龄：<span>"+other.age+"</span></p>" +
                         "<p>挂号数：<span>"+other.subnum+"</span></p>" +
+                        "<button type='button' onclick='subcribe("+ other.arrangeId+")'>预约</button>" +
                         "</div>");
                 }
             },
@@ -102,27 +102,28 @@
         console.log(arrangeId);
     }
 
-    function subcribe(){
-        if(arrangeId === ""){
-            alert("选择医生");
-        }else {
-            $.ajax({
-                url: "subdoctor",
-                type: "POST",
-                data: {"arrangeId": arrangeId,},
-                dataType: "JSON",
-                success: function(res) {
-                    if(res.result == 1){
-                        alert("预约成功！");
-                    }else{
-                        alert("预约失败！");
-                    }
-                },
-                error: function(err) {
-                    alert("出现错误！");
+    function subcribe(arrangeId){
+        $.ajax({
+            url: "subdoctor",
+            type: "POST",
+            data: {"arrangeId": arrangeId,},
+            dataType: "JSON",
+            success: function(res) {
+                var result = res.result;
+                if(result == 0){
+                    alert("预约出现错误，请重试！");
+                }else if(result == 1){
+                    alert("预约成功！");
+                }else if(result == 2){
+                    alert("已有预约，不能再预约了");
+                }else if(result == 3){
+                    alert(res.subcribeId +"该单号已爽约不能预约了！");
                 }
-            });
-        }
+            },
+            error: function(err) {
+                alert("出现错误！");
+            }
+        });
     }
 
 </script>
