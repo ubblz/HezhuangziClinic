@@ -1,11 +1,15 @@
 package com.hezhuangzi.dao;
 
+import com.hezhuangzi.entity.ArragneDoctor;
 import com.hezhuangzi.entity.ClinicWorker;
 import com.hezhuangzi.util.MyDBUtil;
 import com.hezhuangzi.util.OtherUtils;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.ehcache.impl.internal.loaderwriter.writebehind.NonBatchingLocalHeapWriteBehindQueue;
+import sun.applet.AppletEventMulticaster;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -41,5 +45,53 @@ public class ClinicDao {
             queryRunner.execute(conn,sql,params);
         }
         DbUtils.close(conn);
+    }
+
+    public List<ClinicWorker> queryArrange(String date, String sector, String time) throws SQLException {
+        Connection conn = MyDBUtil.getConnection();
+        QueryRunner qr = new QueryRunner();
+        String sql = "select * " +
+                "from clinic_worker as c " +
+                "where " +
+                "!(c.clinicId in (select a.clinicId from arrange_doctor as a " +
+                "INNER JOIN clinic_worker c " +
+                "on a.clinicId = c.clinicId and a.subdate = ? and a.ampm = ?)) and c.typ = ?";
+        Object[] params = {date,time,sector};
+        List<ClinicWorker> list = qr.query(conn,sql,params,new BeanListHandler<>(ClinicWorker.class));
+
+        DbUtils.close(conn);
+        return list;
+    }
+
+    public int arrangeOneDoctor(String clinicId, String date, String ampm, String subnum) throws SQLException {
+        Connection conn = MyDBUtil.getConnection();
+        QueryRunner qr = new QueryRunner();
+        String sql = "insert into arrange_doctor(clinicId,subnum,ampm,subdate) values(?,?,?,?)";
+        Object[] params = {clinicId,subnum,ampm,date};
+        int count = qr.execute(conn,sql,params);
+        DbUtils.close(conn);
+        return count;
+    }
+
+    public List<ArragneDoctor> queryArrangeDoctor() throws SQLException {
+        Connection conn = MyDBUtil.getConnection();
+        QueryRunner qr = new QueryRunner();
+        String sql = "select *  from arrange_doctor as a " +
+                "INNER JOIN clinic_worker as c " +
+                "on a.clinicId = c.clinicId ";
+//        Object[] params = {};
+        List<ArragneDoctor> list = qr.query(conn,sql,new BeanListHandler<>(ArragneDoctor.class));
+        DbUtils.close(conn);
+        return list;
+    }
+
+    public boolean cancelArrangeDoctor(String arrangeId) throws SQLException {
+        Connection conn = MyDBUtil.getConnection();
+        QueryRunner qr = new QueryRunner();
+        String sql = "delete from arrange_doctor where arrangeId = ?";
+        Object[] params = {arrangeId};
+        int count  = qr.execute(conn,sql,params);
+        DbUtils.close(conn);
+        return count>0?true:false;
     }
 }

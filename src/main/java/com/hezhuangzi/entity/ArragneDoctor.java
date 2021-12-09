@@ -9,6 +9,44 @@ public class ArragneDoctor {
     private Integer subnum;
     private String ampm;
     private Date subdate;
+    private String cname;
+    private Integer age;
+    private Date birth;
+    private String phone;
+    private String gen;
+    private String post;
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Integer getArrangeId() {
         return arrangeId;
@@ -58,6 +96,26 @@ public class ArragneDoctor {
                 ", subnum=" + subnum +
                 ", ampm='" + ampm + '\'' +
                 ", subdate=" + subdate +
+                ", cname='" + cname + '\'' +
+                ", age=" + age +
+                ", birth=" + birth +
+                ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public String getGen() {
+        return gen;
+    }
+
+    public void setGen(String gen) {
+        this.gen = gen;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
     }
 }

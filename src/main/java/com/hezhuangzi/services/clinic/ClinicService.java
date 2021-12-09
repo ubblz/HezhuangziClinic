@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.fastjson.JSON;
 import com.hezhuangzi.dao.ClinicDao;
+import com.hezhuangzi.entity.ArragneDoctor;
 import com.hezhuangzi.entity.ClinicWorker;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.lang.ref.ReferenceQueue;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +51,7 @@ public class ClinicService {
                     case "druadmin":
                         break;
                     case "secadmin":
+                        response.sendRedirect("sectoradmin");
                         break;
                 }
             }else{
@@ -140,5 +143,92 @@ public class ClinicService {
             }
             out.println(JSON.toJSONString(result));
         })).sheet().doRead();
+    }
+
+    public void queryArrangeDoctor(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/json;charset=utf-8");
+        String date = request.getParameter("date");
+        String sector = request.getParameter("sector");
+        String time = request.getParameter("time");
+        System.out.println(date);
+        System.out.println(sector);
+        System.out.println(time);
+        PrintWriter out = null;
+        Map<String,Object> result = new HashMap<>();
+        try {
+            out = response.getWriter();
+            List<ClinicWorker> workers = dao.queryArrange(date,sector,time);
+            result.put("msg","success");
+            result.put("data",workers);
+            out.println(JSON.toJSONString(result));
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            result.put("msg","success");
+            out.println(JSON.toJSONString(result));
+        }
+    }
+
+    public void chooseArrangeDoctor(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/text;charset=utf-8");
+        String clinicId = request.getParameter("clinicId");
+        String date = request.getParameter("date");
+        String ampm = request.getParameter("ampm");
+        String subnum = request.getParameter("subnum");
+
+        System.out.println(clinicId);
+        System.out.println(date);
+        System.out.println(ampm);
+        System.out.println(subnum);
+
+        PrintWriter out = null;
+        String msg = "";
+        try {
+            out = response.getWriter();
+            int count = dao.arrangeOneDoctor(clinicId,date,ampm,subnum);
+            msg = count > 0 ?"success":"error";
+        } catch (SQLException | IOException e) {
+            msg = "error";
+            e.printStackTrace();
+        }
+        out.println(msg);
+
+    }
+
+    public void sectorModify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String date = request.getParameter("date");
+        String name = request.getParameter("cname");
+        String time = request.getParameter("time");
+        request.setAttribute("cancelResult",request.getParameterValues("cancelResult"));
+        try {
+            List<ArragneDoctor> list = dao.queryArrangeDoctor();
+            if(!list.isEmpty()){
+                request.setAttribute("arrangeDoctorList",list);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        request.getRequestDispatcher("sectormodify.jsp").forward(request,response);
+    }
+
+    public void cancelArrange(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("application/text;charset=utf-8");
+        String arrangeId = request.getParameter("arrangeId");
+        String msg = "";
+
+        PrintWriter out = null;
+
+        try {
+            out = response.getWriter();
+            if(dao.cancelArrangeDoctor(arrangeId)){
+                msg = "success";
+            }else{
+                msg = "error";
+            }
+        } catch (SQLException | IOException e) {
+            msg = "error";
+            e.printStackTrace();
+        }
+        out.println(msg);
+
     }
 }

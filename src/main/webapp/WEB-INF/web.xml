@@ -26,7 +26,7 @@
 <!--  </servlet-mapping>-->
 
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>adminlogin.jsp</welcome-file>
   </welcome-file-list>
 
 
