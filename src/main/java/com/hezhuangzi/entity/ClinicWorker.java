@@ -4,14 +4,15 @@ import java.util.Date;
 
 public class ClinicWorker {
     private String clinicId;
-    private String gen;
     private String cname;
+    private String gen;
     private Date birth;
     private Integer age;
     private String post;
-    private String pic;
     private String phone;
+    private String pic;
     private String typ;
+    private String pwd;
 
     @Override
     public String toString() {
@@ -37,7 +38,6 @@ public class ClinicWorker {
         this.typ = typ;
     }
 
-    private String pwd;
 
     public String getClinicId() {
         return clinicId;

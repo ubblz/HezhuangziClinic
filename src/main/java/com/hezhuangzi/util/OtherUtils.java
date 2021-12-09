@@ -22,4 +22,11 @@ public class OtherUtils {
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmssSS");
         return sdf.format(new Date());
     }
+
+    public static String dateConvert(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String sdfDate = sdf.format(date);
+        return sdfDate;
+    }
+
 }
