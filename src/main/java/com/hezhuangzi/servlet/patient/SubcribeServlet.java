@@ -18,10 +18,8 @@ import java.util.GregorianCalendar;
 public class SubcribeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PatientDao dao = new PatientDao();
         SubcribeService service = new SubcribeService();
         service.displaySubcribe(request,response);
-
     }
 
     @Override

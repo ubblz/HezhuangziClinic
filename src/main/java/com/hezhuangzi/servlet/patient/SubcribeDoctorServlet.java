@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "SubDoctorServlet", value = "/subdoctor")
+@WebServlet(name = "SubcirbeDoctorServlet", value = "/subcribedoctor")
 public class SubcribeDoctorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

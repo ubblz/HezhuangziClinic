@@ -32,13 +32,13 @@
     <div class="main w">
         <div class="left-info ">
             <%--            <p>${empty user}</p>--%>
-            <p>编号:<span>${patientInfo.patientId}</span> </p>
-            <p>姓名:<span id="uname">${patientInfo.name}</span>  </p>
-            <p>性别:<span id="ugen"> ${patientInfo.gen}</span> </p>
-            <p>年龄:<span id="uage">${patientInfo.age}</span>  </p>
-            <p>身份证:<span id="uicard">${patientInfo.icard}</span>  </p>
-            <p>手机号码:<span id="uphone"> ${patientInfo.phone}</span> </p>
-            <p>邮箱:<span id="uemail"> ${patientInfo.email}</span> </p>
+            <p>编号:<span>${patientInfo.pati_id}</span> </p>
+            <p>姓名:<span id="uname">${patientInfo.pati_name}</span>  </p>
+            <p>性别:<span id="ugen"> ${patientInfo.pati_gen}</span> </p>
+            <p>年龄:<span id="uage">${patientInfo.pati_age}</span>  </p>
+            <p>身份证:<span id="uicard">${patientInfo.pati_icard}</span>  </p>
+            <p>手机号码:<span id="uphone"> ${patientInfo.pati_phone}</span> </p>
+            <p>邮箱:<span id="uemail"> ${patientInfo.pati_email}</span> </p>
         </div>
         <div class="right-modify">
             <form id="form-info" action="##" method="post" onsubmit="return false">
@@ -61,10 +61,10 @@
 <script>
     var displayData = function(){
         $.ajax({
-            url: "getinfo",
+            url: "getpatientinfo",
             type: "POST",
             dataType:"JSON",
-            success: function(res,status,xhr) {
+            success: function(res) {
                 console.log(res.name);
                 document.getElementById('uname').innerHTML = res.name;
                 document.getElementById('ugen').innerHTML = res.gen;

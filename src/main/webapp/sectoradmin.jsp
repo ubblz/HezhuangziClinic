@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
       <title>科室管理</title>
@@ -17,7 +18,7 @@
 <a href="sectormodify">修改就诊</a>
 
 <form id="querydoctor-form">
-      日期：<input id="date" type="date" name="date">
+      日期：<input id="date" type="date" name="date" max="${endDate}" min="${startData}">
       科室：<select id="sector" name="sector">
                   <option value="neike">内科</option>
                   <option value="waike">外科</option>
@@ -64,8 +65,8 @@
         $("#arrange-table").append("<tr> <th>医生工号</th> <th>医生姓名</th> <th>设置挂号数</th> <th>安排</th> </tr>");
         for (let i = 0; i < data.length; i++) {
             $("#arrange-table").append("<tr id='tr"+i+"'> " +
-                "<td>"+data[i].clinicId+"</td> " +
-                "<td>"+data[i].cname+"</td> " +
+                "<td>"+data[i].clin_id+"</td> " +
+                "<td>"+data[i].clin_name+"</td> " +
                 "<td><input id='"+"subnum"+i+"' name='subnum' value='20' type='number''></td>"+
                 "<td><a href='#' onclick='arrangeDoctor("+i+")'>选择</a></td>"+
                     "</tr>");
@@ -78,7 +79,7 @@
         // console.log($("#time").val());
         // console.log($("#sector").val());
 
-        var clinicId = saveData[index].clinicId;
+        var clinicId = saveData[index].clin_id;
         var subnum = $("#subnum"+index).val();
         var ampm = $("#time").val();
         var subdate = $("#date").val();

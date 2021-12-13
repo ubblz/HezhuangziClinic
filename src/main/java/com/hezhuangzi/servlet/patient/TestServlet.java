@@ -1,5 +1,8 @@
 package com.hezhuangzi.servlet.patient;
 
+import com.hezhuangzi.entity.ClinicWorker;
+import com.hezhuangzi.websocket.NoticeDoctor;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,7 +12,7 @@ import java.io.IOException;
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("choosetime"));
+
     }
 
     @Override

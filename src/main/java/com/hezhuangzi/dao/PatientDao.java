@@ -1,233 +1,213 @@
 package com.hezhuangzi.dao;
 
 import com.hezhuangzi.entity.*;
-import com.hezhuangzi.util.MyDBUtil;
+import com.hezhuangzi.util.MySqlDBUtil;
 import com.hezhuangzi.util.OtherUtils;
-import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.*;
 
-import java.awt.*;
-import java.lang.reflect.AnnotatedArrayType;
-import java.sql.Connection;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PatientDao {
+    //Map MapList Array ArrayList Bean BeanList
+
     //注册
-    public void  patientSignUp(String phone, String pwd) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
+    public int  patientSignUp(String phone, String pwd) throws SQLException {
         String patientId = "p"+ OtherUtils.getCurrentTimeMillis();
-        String sql = "INSERT INTO patient_info(patientId,phone,pwd) VALUES(?,?,?)";
+        String sql = "INSERT INTO patient_info(pati_id,pati_phone,pati_pwd) VALUES(?,?,?)";
+
         Object[] params = {patientId,phone,pwd};
-        queryRunner.execute(conn,sql,params);
-        DbUtils.close(conn);
+
+        int effect = MySqlDBUtil.insert(sql,params);
+
+        return effect;
     }
 
     //登陆
     public PatientInfo patientLogin(String phone,String pwd) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "SELECT * FROM patient_info WHERE phone= ? AND pwd = ?";
+        String sql = "SELECT * FROM patient_info WHERE pati_phone= ? AND pati_pwd = ?";
         Object[] params = {phone,pwd};
-        PatientInfo patientInfo = queryRunner.query(conn,sql,params,new BeanHandler<>(PatientInfo.class));
-        DbUtils.close(conn);
+        PatientInfo patientInfo = MySqlDBUtil.queryBean(sql,params,PatientInfo.class);
         return patientInfo;
     }
-
 
     //获取登陆用户的信息
     public PatientInfo getPatientInfo(String patientId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "SELECT * FROM patient_info WHERE patientId = ?";
+        String sql = "SELECT * FROM patient_info WHERE pati_id = ?";
         Object[] params = {patientId};
-        PatientInfo patientInfo = queryRunner.query(conn,sql,params,new BeanHandler<>(PatientInfo.class));
-        DbUtils.close(conn);
+        PatientInfo patientInfo = MySqlDBUtil.queryBean(sql, params, PatientInfo.class);
         return patientInfo;
     }
 
-    //获取登陆用户的信息
-//    public PatientInfo getPatientInfoById(String patientId) throws SQLException {
-//        Connection conn = MyDBUtil.getConnection();
-//        QueryRunner queryRunner = new QueryRunner();
-//        String sql = "SELECT * FROM patient_info WHERE patientId = ?";
-//        Object[] params = {patientId};
-//        PatientInfo patientInfo = queryRunner.query(conn,sql,params,new BeanHandler<>(PatientInfo.class));
-//        DbUtils.close(conn);
-//        return patientInfo;
-//    }
-
-/*
-* String name = request.getParameter("modifyname");
-        String gen = request.getParameter("modifygen");
-        String age = request.getParameter("modifyage");
-        String icard = request.getParameter("modifyicard");
-        String phone = request.getParameter("modifyphone");
-        String email = request.getParameter("modifyemail");
-* */
     public int updatePatientInfo(String patientId,String name,String age,String gen,String icard,String email) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "UPDATE patient_info SET age=?,gen=?,icard=?,name=?,email=?,getinfo=1 WHERE patientId = ?";
+        String sql = "UPDATE patient_info SET pati_age=?,pati_gen=?,pati_icard=?,pati_name=?,pati_email=?,pati_getinfo=1 WHERE pati_id = ?";
         Object[] params = {age,gen,icard,name,email,patientId};
-        int count = queryRunner.execute(conn,sql,params);
-        DbUtils.close(conn);
-        return count;
+        int effect = MySqlDBUtil.update(sql,params);
+        return effect;
     }
 
     public MinMaxDate getSubMinMaxDate() throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
         MinMaxDate date = new MinMaxDate();
         QueryRunner qr = new QueryRunner();
-        String maxSql = "SELECT max(subdate) FROM arrange_doctor";
-        String minSql = "SELECT min(subdate) FROM arrange_doctor";
-        Date max = (Date) qr.query(conn,maxSql,new ScalarHandler());
-        Date min = (Date) qr.query(conn,minSql,new ScalarHandler());
+        String maxSql = "SELECT max(arra_subdate) FROM arrange_doctor";
+        String minSql = "SELECT min(arra_subdate) FROM arrange_doctor";
+        Date max = MySqlDBUtil.queryScalar(maxSql);
+        Date min = MySqlDBUtil.queryScalar(minSql);
         date.setMinDate(min);
         date.setMaxDate(max);
-        DbUtils.close(conn);
         return date;
     }
-
+                            /*
+                            * 改
+                            * */
     //查询预约的医生信息
-    public List selectDoctor(String date, String sector, String time) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-//        String sql = "select arrangeId,c.clinicId as clinicId,amsubnum,pmsubnum,subdate,cname,gen,birth,age,post,pic phone,typ from arrange_doctor as a " +
-//                "inner join clinic_worker as c " +
-//                "on a.clinicId = c.clinicId and subdate="+date+" and post = "+ sector +" and "+time+ " <> 0;";
-        String sql = "select arrangeId,c.clinicId as clinicId,subnum,subdate,cname,gen,birth,age,post,pic,phone,typ from arrange_doctor as a " +
-                "inner join clinic_worker as c " +
-                "on a.clinicId = c.clinicId and subdate= ? and post = ? and subnum <> 0 and ampm = ?";
-        Object[] params = {date,sector,time};
-//        System.out.println(sql);
-        List doctorList = queryRunner.query(conn,sql,params,new MapListHandler());
-//        List doctorList = queryRunner.query(conn,sql,new MapListHandler());
-//        List<ChooseDoctor> doctorList = queryRunner.query(conn,sql,params,new BeanListHandler<>(ChooseDoctor.class));
-
-        DbUtils.close(conn);
-        return doctorList;
+    public List<ArrangeDoctor> querySubcribeDoctor(String date, String sector, String time) throws SQLException {
+        String sql = "SELECT * from clinic_worker as c " +
+                "INNER JOIN arrange_doctor as a " +
+                "on c.clin_id = a.clin_id and c.clin_type = ? and a.arra_subdate = ? and a.arra_ampm = ? and a.arra_subnum <> 0";
+        Object[] params = {sector,date,time};
+        List<ArrangeDoctor>  queryDoctorList = MySqlDBUtil.queryBeanList(sql,params, ArrangeDoctor.class);
+        return queryDoctorList;
     }
 
-    public ArragneDoctor getDoctorInfo(String arrangeId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
+    public ArrangeDoctor getDoctorInfo(String arrangeId) throws SQLException {
         String sql = "SELECT a.* FROM clinic_worker as c " +
                 "inner join arrange_doctor as a " +
-                "on a.arrangeId = ? and c.clinicId  = a.clinicId ;";
+                "on a.arra_id = ? and c.clin_id  = a.clin_id ;";
         Object[] params = {arrangeId};
-        ArragneDoctor doctor = queryRunner.query(conn,sql, params,new BeanHandler<>(ArragneDoctor.class));
-        DbUtils.close(conn);
+        ArrangeDoctor doctor = MySqlDBUtil.queryBean(sql, params, ArrangeDoctor.class);
         return doctor;
     }
 
-    public boolean addPatientSubcribe(ArragneDoctor arragneDoctor, PatientInfo patientInfo) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
+    public int addPatientSubcribe(String arraryId, String pati_id) throws SQLException {
         String sql = "insert into " +
-                "patient_subcribe(subcribeId,patientId,ampm,clinicId,cancelSub,breakTime,finish,subTime) " +
-                "values(?,?,?,?,?,?,?,?)";
-        Object[] params = {OtherUtils.subcribeNum(),
-                patientInfo.getPatientId(),
-                arragneDoctor.getAmpm(),
-        arragneDoctor.getClinicId(),
-        0,0,0,arragneDoctor.getSubdate()};
-        int count = queryRunner.execute(conn,sql,params);
-        DbUtils.close(conn);
-        return count > 0;
+                "patient_subcribe(" +
+                "subc_id," +
+                "pati_id," +
+                "arra_id," +
+                "subc_cancel," +
+                "subc_break," +
+                "subc_finish) " +
+                "values(?,?,?,?,?,?)";
+        Object[] params = {OtherUtils.subcribeNum(),pati_id, arraryId, 0,0,0};
+        String updateSql = "update arrange_doctor set arra_subnum=arra_subnum-1 where arra_id = ?";
+        Object[] params2 = {arraryId};
+        int updateEffect = MySqlDBUtil.update(updateSql,params2);
+        int effect = MySqlDBUtil.insert(sql,params);
+        return effect;
     }
 
     public List<PatientSubcribe> getPatientAllSubcribe(String patientId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner qr = new QueryRunner();
-        String sql = "select * from patient_subcribe where patientId = ? ORDER BY subcribeId DESC";
+        String sql = "select * from patient_subcribe as subc " +
+                "inner join patient_info as info " +
+                "on subc.pati_id = info.pati_id and subc.pati_id = ? " +
+                "inner join arrange_doctor as arra " +
+                "on subc.arra_id = arra.arra_id " +
+                "inner join clinic_worker as clin " +
+                "on arra.clin_id = clin.clin_id " +
+                "ORDER BY subc_id desc ";
         Object[] params = {patientId};
-        List<PatientSubcribe> list = qr.query(conn,sql,params,new BeanListHandler<>(PatientSubcribe.class));
-        DbUtils.close(conn);
+        List<PatientSubcribe> list = MySqlDBUtil.queryBeanList(sql,params,PatientSubcribe.class);
         return list;
     }
 
     public PatientCaseHistory selectCaseHistory(String subcribeId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from patient_casehistory where subcribeId = ?";
+        String sql = "select * from patient_casehistory where subc_id = ?";
         Object[] params = {subcribeId};
-        PatientCaseHistory history = queryRunner.query(conn,sql,params,new BeanHandler<>(PatientCaseHistory.class));
-        DbUtils.close(conn);
-//        System.out.println(history);
+        PatientCaseHistory history = MySqlDBUtil.queryBean(sql,params,PatientCaseHistory.class);
         return history;
     }
 
     public PatientPrescription selectPrescription(String subcribeId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from patient_prescription where subcribeId = ?";
+        String sql = "select * from patient_prescription where subc_id = ?";
         Object[] params = {subcribeId};
-        PatientPrescription query = queryRunner.query(conn, sql, params, new BeanHandler<>(PatientPrescription.class));
-        DbUtils.close(conn);
+        PatientPrescription query = MySqlDBUtil.queryBean(sql, params,PatientPrescription.class);
         return query;
     }
 
-    public List<OrderDrug> selectOrderDrug(Integer selectDrug) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
+    public List<OrderDrug> selectOrderDrug(String presid) throws SQLException {
         String sql = "SELECT o.* from patient_prescription as p " +
                 "INNER JOIN order_drug as o " +
-                "ON p.selectDrug = o.selectDrug and o.selectDrug = ?";
+                "ON p.pres_id = o.pres_id and o.pres_id = ?";
         System.out.println(sql);
-        Object[] params = {selectDrug};
-        List<OrderDrug> drugList = queryRunner.query(conn,sql,params,new BeanListHandler<>(OrderDrug.class));
-        DbUtils.close(conn);
+        Object[] params = {presid};
+        List<OrderDrug> drugList = MySqlDBUtil.queryBeanList(sql,params,OrderDrug.class);
         return drugList;
     }
 
     public ClinicWorker getSubcribeDoctorInfo(String clinicId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from clinic_worker where clinicId = ?";
+        String sql = "select * from clinic_worker where clin_id = ?";
         Object[] params = {clinicId};
-        ClinicWorker query = queryRunner.query(conn, sql, params, new BeanHandler<>(ClinicWorker.class));
-//        System.out.println(query);
-        DbUtils.close(conn);
+        ClinicWorker query = MySqlDBUtil.queryBean(sql, params,ClinicWorker.class);
         return query;
     }
 
-    public boolean queryAlreaySubcribe(String arrangeId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from patient_subcribe where patientId = ? and finish = 0;";
-        Object[] params = {arrangeId};
-        PatientSubcribe subcribe = queryRunner.query(conn,sql,params,new BeanHandler<>(PatientSubcribe.class));
-        DbUtils.close(conn);
+    public boolean queryAlreaySubcribe(String patiId) throws SQLException {
+        String sql = "select * from patient_subcribe where pati_id = ? and subc_cancel = 0 and subc_finish = 0;";
+        Object[] params = {patiId};
+        PatientSubcribe subcribe = MySqlDBUtil.queryBean(sql,params,PatientSubcribe.class);
         return subcribe != null;
     }
 
-    public Map queryBreakTime(String arrangeId) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from patient_subcribe where patientId = ? and breakTime = 1;";
-        Object[] params = {arrangeId};
-        Map subcribe = queryRunner.query(conn,sql,params,new MapHandler());
-        DbUtils.close(conn);
+    public Map queryPatientBreak(String patiId) throws SQLException {
+        String sql = "select  from patient_subcribe where pati_id = ? and subc_break = 1;";
+        Object[] params = {patiId};
+        Map subcribe = MySqlDBUtil.queryMap(sql,params);
         return subcribe;
     }
 
-    public boolean cancelPatientSubcribe(String cancel) throws SQLException {
-        Connection conn = MyDBUtil.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
-        String sql = "delete from patient_subcribe where subcribeId = ?";
-        Object[] params = {cancel};
-        int count = queryRunner.execute(conn,sql,params);
+    public int cancelPatientSubcribe(String subcId) throws SQLException {
+        String sql = "update patient_subcribe set subc_cancel = 1 where subc_id = ?";
+        String sqlAdd = "update arrange_doctor set arra_subnum = arra_subnum + 1 where arra_id in (select arra_id from patient_subcribe where subc_id = ?)";
+        Object[] params = {subcId};
+        int effect = MySqlDBUtil.delete(sql,params);
+        int addEffect = MySqlDBUtil.update(sqlAdd,params);
+        return effect;
+    }
 
+    public ArrangeDoctor queryWhetherBreak(String pati_id) throws SQLException {
 
-        DbUtils.close(conn);
-        return count > 0;
+        String sql = "select max(arra_subdate) as arra_subdate,a.arra_ampm  from patient_subcribe as p " +
+                "inner join arrange_doctor as a " +
+                "on p.arra_id = a.arra_id and p.subc_finish = 0 and p.subc_cancel = 0 and p.pati_id = ?";
+        Object[] params = {pati_id};
+        ArrangeDoctor arragneDoctor = MySqlDBUtil.queryBean(sql,params, ArrangeDoctor.class);
+
+        return arragneDoctor;
+    }
+
+    public PatientRegister getPatientRegister(String subc_id) throws SQLException {
+        String sql = "select * from patient_register as regi " +
+                "inner join clinic_worker as clin " +
+                "on regi.regi_clin_id = clin.clin_id and regi.subc_id = ?;";
+        Object[] params = {subc_id};
+        PatientRegister patientRegister = MySqlDBUtil.queryBean(sql,params,PatientRegister.class);
+        return patientRegister;
+    }
+
+    public PatientCaseHistory getPatientCaseHistory(String regi_id) throws SQLException {
+        String sql = "select * from patient_casehistory where regi_id = ?";
+        Object[] params = {regi_id};
+        PatientCaseHistory patientCaseHistory = MySqlDBUtil.queryBean(sql,params,PatientCaseHistory.class);
+        return patientCaseHistory;
+    }
+
+    public PatientPrescription getPatientPrescription(String regi_id) throws SQLException {
+        String sql = "select * from patient_prescription where regi_id = ?";
+        Object[] params = {regi_id};
+        PatientPrescription patientPrescription = MySqlDBUtil.queryBean(sql,params,PatientPrescription.class);
+        return patientPrescription;
+    }
+
+    public List<OrderDrug> getOrderDrug(String pres_id) throws SQLException {
+        String sql = "SELECT * from order_drug as o " +
+                "INNER JOIN drug_repository as d " +
+                "on pres_id = ? and o.drug_id = d.drug_id;";
+        Object[] params = {pres_id};
+        List<OrderDrug> orderDrugList = MySqlDBUtil.queryBeanList(sql,params,OrderDrug.class);
+        return orderDrugList;
     }
 }

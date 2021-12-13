@@ -17,7 +17,7 @@ import java.util.Map;
 public class PatientService {
     private PatientDao dao = new PatientDao();
 
-    public void successLogin(HttpServletRequest request, HttpServletResponse response) {
+    public void successLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         //获取phone 和 手机号。
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("pwd");
@@ -34,6 +34,7 @@ public class PatientService {
                 response.sendRedirect("patientinfo");
             }else{
                 System.out.println("登陆失败!");
+                request.getRequestDispatcher("login.jsp").forward(request,response);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -51,19 +52,19 @@ public class PatientService {
             <p>邮箱:${user.email}</p>
         * */
 
-        response.setContentType("application/json");
+        response.setContentType("application/json;charset=utf-8");
         HttpSession seesion = request.getSession();
         PatientInfo patientInfo =  (PatientInfo) seesion.getAttribute("patientInfo");
         try {
             PrintWriter out = response.getWriter();
-            PatientInfo user = dao.getPatientInfo(patientInfo.getPatientId());
+            PatientInfo user = dao.getPatientInfo(patientInfo.getPati_id());
             System.out.println(user);
             Map<String,String> userInfo = new HashMap<>();
-            userInfo.put("name",user.getName());
-            userInfo.put("gen",user.getGen());
-            userInfo.put("age",user.getAge().toString());
-            userInfo.put("icard",user.getIcard());
-            userInfo.put("email",user.getEmail());
+            userInfo.put("name",user.getPati_name());
+            userInfo.put("gen",user.getPati_gen());
+            userInfo.put("age",user.getPati_age().toString());
+            userInfo.put("icard",user.getPati_icard());
+            userInfo.put("email",user.getPati_email());
             out.println(JSON.toJSONString(userInfo));
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -85,8 +86,8 @@ public class PatientService {
             Map<String,String> map = new HashMap<>();
             try {
                 PrintWriter out = response.getWriter();
-                int count = dao.updatePatientInfo(patientInfo.getPatientId(),name,age,gen,icard,email);
-                session.setAttribute("patientInfo",dao.getPatientInfo(patientInfo.getPatientId()));
+                int count = dao.updatePatientInfo(patientInfo.getPati_id(),name,age,gen,icard,email);
+                session.setAttribute("patientInfo",dao.getPatientInfo(patientInfo.getPati_id()));
                 if(count > 0){
                     map.put("status","success");
                 }else{

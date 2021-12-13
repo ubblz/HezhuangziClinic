@@ -4,8 +4,9 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.fastjson.JSON;
 import com.hezhuangzi.dao.ClinicDao;
-import com.hezhuangzi.entity.ArragneDoctor;
+import com.hezhuangzi.entity.ArrangeDoctor;
 import com.hezhuangzi.entity.ClinicWorker;
+import com.hezhuangzi.util.OtherUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -16,8 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.lang.ref.ReferenceQueue;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ClinicService {
             ClinicWorker worker = dao.queryAdminInfo(clinicId,pwd,admintype);
             System.out.println(worker);
             if(worker != null){
-                String typ = worker.getTyp();
+                String typ = worker.getClin_type();
                 System.out.println(typ);
                 switch (typ){
                     case "sysadmin":
@@ -170,6 +169,7 @@ public class ClinicService {
 
     public void chooseArrangeDoctor(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/text;charset=utf-8");
+
         String clinicId = request.getParameter("clinicId");
         String date = request.getParameter("date");
         String ampm = request.getParameter("ampm");
@@ -195,12 +195,13 @@ public class ClinicService {
     }
 
     public void sectorModify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String date = request.getParameter("date");
-        String name = request.getParameter("cname");
-        String time = request.getParameter("time");
+//        String date = request.getParameter("date");
+//        String name = request.getParameter("cname");
+//        String time = request.getParameter("time");
+
         request.setAttribute("cancelResult",request.getParameterValues("cancelResult"));
         try {
-            List<ArragneDoctor> list = dao.queryArrangeDoctor();
+            List<ArrangeDoctor> list = dao.queryArrangeDoctor();
             if(!list.isEmpty()){
                 request.setAttribute("arrangeDoctorList",list);
             }
@@ -219,7 +220,7 @@ public class ClinicService {
 
         try {
             out = response.getWriter();
-            if(dao.cancelArrangeDoctor(arrangeId)){
+            if(dao.cancelArrangeDoctor(arrangeId) > 0){
                 msg = "success";
             }else{
                 msg = "error";
@@ -230,5 +231,18 @@ public class ClinicService {
         }
         out.println(msg);
 
+    }
+
+    public void sectorAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String startData = OtherUtils.getMondayDate(OtherUtils.getMonDayCount());
+        String endData = OtherUtils.getMondayDate(OtherUtils.getMonDayCount() + 6);
+//        System.out.println(startData);
+//        System.out.println(endData);
+
+        request.setAttribute("startData",startData);
+        request.setAttribute("endDate",endData);
+
+        request.getRequestDispatcher("sectoradmin.jsp").forward(request,response);
     }
 }

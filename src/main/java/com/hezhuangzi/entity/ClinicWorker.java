@@ -3,113 +3,111 @@ package com.hezhuangzi.entity;
 import java.util.Date;
 
 public class ClinicWorker {
-    private String clinicId;
-    private String cname;
-    private String gen;
-    private Date birth;
-    private Integer age;
-    private String post;
-    private String phone;
-    private String pic;
-    private String typ;
-    private String pwd;
+
+    private String clin_id;
+    private String clin_name;
+    private String clin_gen;
+    private Date clin_birth;
+    private Integer clin_age;
+    private String clin_post;
+    private String clin_pic;
+    private String clin_phone;
+    private String clin_type;
+    private String clin_pwd;
 
     @Override
     public String toString() {
         return "ClinicWorker{" +
-                "clinicId='" + clinicId + '\'' +
-                ", gen='" + gen + '\'' +
-                ", cname='" + cname + '\'' +
-                ", birth=" + birth +
-                ", age=" + age +
-                ", post='" + post + '\'' +
-                ", pic='" + pic + '\'' +
-                ", phone='" + phone + '\'' +
-                ", typ='" + typ + '\'' +
-                ", pwd='" + pwd + '\'' +
+                "clin_id='" + clin_id + '\'' +
+                ", clin_name='" + clin_name + '\'' +
+                ", clin_gen='" + clin_gen + '\'' +
+                ", clin_birth=" + clin_birth +
+                ", clin_age=" + clin_age +
+                ", clin_post='" + clin_post + '\'' +
+                ", clin_pic='" + clin_pic + '\'' +
+                ", clin_phone='" + clin_phone + '\'' +
+                ", clin_type='" + clin_type + '\'' +
+                ", clin_pwd='" + clin_pwd + '\'' +
                 '}';
     }
 
-    public String getTyp() {
-        return typ;
+    public String getClin_id() {
+        return clin_id;
     }
 
-    public void setTyp(String typ) {
-        this.typ = typ;
+    public void setClin_id(String clin_id) {
+        this.clin_id = clin_id;
     }
 
-
-    public String getClinicId() {
-        return clinicId;
+    public String getClin_name() {
+        return clin_name;
     }
 
-    public void setClinicId(String clinicId) {
-        this.clinicId = clinicId;
+    public void setClin_name(String clin_name) {
+        this.clin_name = clin_name;
     }
 
-
-    public String getGen() {
-        return gen;
+    public String getClin_gen() {
+        return clin_gen;
     }
 
-    public void setGen(String gen) {
-        this.gen = gen;
+    public void setClin_gen(String clin_gen) {
+        this.clin_gen = clin_gen;
     }
 
-    public Date getBirth() {
-        return birth;
+    public Date getClin_birth() {
+        return clin_birth;
     }
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setClin_birth(Date clin_birth) {
+        this.clin_birth = clin_birth;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getClin_age() {
+        return clin_age;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setClin_age(Integer clin_age) {
+        this.clin_age = clin_age;
     }
 
-    public String getPost() {
-        return post;
+    public String getClin_post() {
+        return clin_post;
     }
 
-    public void setPost(String post) {
-        this.post = post;
+    public void setClin_post(String clin_post) {
+        this.clin_post = clin_post;
     }
 
-    public String getPic() {
-        return pic;
+    public String getClin_pic() {
+        return clin_pic;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic;
+    public void setClin_pic(String clin_pic) {
+        this.clin_pic = clin_pic;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getClin_phone() {
+        return clin_phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setClin_phone(String clin_phone) {
+        this.clin_phone = clin_phone;
     }
 
-
-    public String getPwd() {
-        return pwd;
+    public String getClin_type() {
+        return clin_type;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setClin_type(String clin_type) {
+        this.clin_type = clin_type;
     }
 
-    public String getCname() {
-        return cname;
+    public String getClin_pwd() {
+        return clin_pwd;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setClin_pwd(String clin_pwd) {
+        this.clin_pwd = clin_pwd;
     }
 }

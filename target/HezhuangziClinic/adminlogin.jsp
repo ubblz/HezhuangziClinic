@@ -13,6 +13,7 @@
 </head>
 <body>
 <div style="width:500px;margin:200px auto;text-align: center;">
+    <h1>管理人员登陆</h1>
     <form action="adminlogin" method="post">
         工号：<input type="text" name="clinicid"><br>
         密码:<input type="password" name="pwd"><br>

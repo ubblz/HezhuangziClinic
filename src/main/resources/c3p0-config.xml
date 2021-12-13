@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <!--
+    private static final String JDBC_Driver = "com.mysql.cj.jdbc.Driver";
+    private static final String DBNAME = "hzzDB";
+    private static final String JDBC_URI= "jdbc:mysql://localhost:3306/"+ DBNAME +"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PWD = "hhrx";
+    -->
+
+    <!--默认配置-->
+    <default-config>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </default-config>
+
+    <!--配置连接池mysql-->
+    <named-config name="mysql">
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/hzzDB?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</property>
+        <property name="user">root</property>
+        <property name="password">hhrx</property>
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxStatements">200</property>
+    </named-config>
+
+    <!--配置连接池2-->
+    ......
+</c3p0-config>

@@ -1,5 +1,7 @@
 package com.hezhuangzi.servlet.clinic;
 
+import com.hezhuangzi.services.clinic.ClinicService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,7 +11,8 @@ import java.io.IOException;
 public class SectorAdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("sectoradmin.jsp").forward(request,response);
+        ClinicService service = new ClinicService();
+        service.sectorAdmin(request,response);
     }
 
     @Override

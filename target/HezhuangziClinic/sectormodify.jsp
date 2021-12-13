@@ -67,19 +67,19 @@
     private String phone;
     private String gen;
     --%>
-    <tr id="tr${item.arrangeId}">
-      <td>${item.arrangeId}</td>
-      <td>${item.clinicId}</td>
-      <td>${item.cname}</td>
-      <td>${item.gen}</td>
-      <td>${item.age}</td>
-      <td>${item.birth}</td>
-      <td>${item.phone}</td>
-      <td>${item.post}</td>
-      <td>${item.subnum}</td>
-      <td>${item.subdate}</td>
-      <td>${item.ampm}</td>
-      <td><a href="#" onclick="cancelArrange(${item.arrangeId})">取消</a></td>
+    <tr id="tr${item.arra_id}">
+      <td>${item.arra_id}</td>
+      <td>${item.clin_id}</td>
+      <td>${item.clin_name}</td>
+      <td>${item.clin_gen}</td>
+      <td>${item.clin_age}</td>
+      <td>${item.clin_birth}</td>
+      <td>${item.clin_phone}</td>
+      <td>${item.clin_post}</td>
+      <td>${item.arra_subnum}</td>
+      <td>${item.arra_subdate}</td>
+      <td>${item.arra_ampm}</td>
+      <td><a href="#" onclick="cancelArrange(${item.arra_id})">取消</a></td>
     </tr>
   </c:forEach>
 </table>

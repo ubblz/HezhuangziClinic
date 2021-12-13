@@ -61,25 +61,24 @@
 
     function selectDoctor(){
         $.ajax({
-            url:"selectdoctor",
+            url:"querysubcribedoctor",
             type:"POST",
             dateType:"JSON",
             data:$('#form-doctor').serialize(),
-            success:function(result,status,xhr){
+            success:function(result){
                 $(".doctor").remove();
-                var doctors = result.doctors;
-                for(var doc in doctors){
-                    var other = doctors[doc];
+                for(var index in result){
+                    let other = result[index];
+                    console.log(other);
                     $("#doctor-list").append("" +
                         "<div class='doctor' onclick=''>" +
-                        // "<div>序号：<span>"+other.arrangeId +"</span></div>" +
-                        "<img src='img/pic.png' width='100' height='100' alt=''>" +
-                        "<p>姓名：<span>"+other.cname+"</span></p>" +
-                        "<p>科室：<span>"+other.post+"</span></p>" +
-                        "<p>性别：<span>"+other.gen+"</span></p>" +
-                        "<p>年龄：<span>"+other.age+"</span></p>" +
-                        "<p>挂号数：<span>"+other.subnum+"</span></p>" +
-                        "<button type='button' onclick='subcribe("+ other.arrangeId+")'>预约</button>" +
+                            "<img src='img/pic.png' width='100' height='100' alt=''>" +
+                            "<p>姓名：<span>"+other.clin_name+"</span></p>" +
+                            "<p>科室：<span>"+other.clin_post+"</span></p>" +
+                            "<p>性别：<span>"+other.clin_gen+"</span></p>" +
+                            "<p>年龄：<span>"+other.clin_age+"</span></p>" +
+                            "<p>挂号数：<span id= 'subnum"+other.arra_id+"'"+">"+other.arra_subnum+"</span></p>" +
+                            "<button type='button' onclick='subcribe("+ other.arra_id+","+other.arra_subnum+")'>预约</button>" +
                         "</div>");
                 }
             },
@@ -89,35 +88,25 @@
         });
     }
 
-    function chooseDoctor(obj){
-        var sp = obj.getElementsByTagName("div")[0];
-        var value = sp.getElementsByTagName("span")[0].innerHTML;
-        if(value != arrangeId){
-            obj.className="doctor doctor-border";
-            arrangeId = value;
-        }else{
-            obj.className="doctor doctor-not-border";
-            arrangeId = "";
-        }
-        console.log(arrangeId);
-    }
+    function subcribe(arrangeId,num){
 
-    function subcribe(arrangeId){
         $.ajax({
-            url: "subdoctor",
+            url: "subcribedoctor",
             type: "POST",
             data: {"arrangeId": arrangeId,},
             dataType: "JSON",
             success: function(res) {
                 var result = res.result;
-                if(result == 0){
+                if(result === 0){
                     alert("预约出现错误，请重试！");
-                }else if(result == 1){
+                }else if(result === 1){
                     alert("预约成功！");
-                }else if(result == 2){
+                    var devnum = num - 1;
+                    document.getElementById("subnum"+arrangeId).innerHTML = devnum;
+                }else if(result === 2){
                     alert("已有预约，不能再预约了");
-                }else if(result == 3){
-                    alert(res.subcribeId +"该单号已爽约不能预约了！");
+                }else if(result === 3){
+                    alert("已有爽约，等待下周再预约！");
                 }
             },
             error: function(err) {

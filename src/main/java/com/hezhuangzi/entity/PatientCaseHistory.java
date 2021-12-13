@@ -5,71 +5,93 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class PatientCaseHistory {
-    private String csId;
-    private String subcribeId;
-    private String clinicId;
-    private Date retime;
-    private String hpi;
+    private Integer case_id;
+    private String regi_id;
 
-    private LocalDateTime createTime;
-
-    public String getCsId() {
-        return csId;
+    public Date getCase_date() {
+        return case_date;
     }
 
-    public void setCsId(String csId) {
-        this.csId = csId;
+    public void setCase_date(Date case_date) {
+        this.case_date = case_date;
     }
 
-    public String getSubcribeId() {
-        return subcribeId;
+    private Date case_date;
+    private String case_hpi;
+    private LocalDateTime case_createtime;
+
+    //regi info
+    private String subc_id;
+    private LocalDateTime regi_createtime;
+    private Integer regi_finish;
+
+    public Integer getCase_id() {
+        return case_id;
     }
 
-    public void setSubcribeId(String subcribeId) {
-        this.subcribeId = subcribeId;
+    public void setCase_id(Integer case_id) {
+        this.case_id = case_id;
     }
 
-    public String getClinicId() {
-        return clinicId;
+    public String getRegi_id() {
+        return regi_id;
     }
 
-    public void setClinicId(String clinicId) {
-        this.clinicId = clinicId;
-    }
-
-    public Date getRetime() {
-        return retime;
-    }
-
-    public void setRetime(Date retime) {
-        this.retime = retime;
-    }
-
-    public String getHpi() {
-        return hpi;
-    }
-
-    public void setHpi(String hpi) {
-        this.hpi = hpi;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setRegi_id(String regi_id) {
+        this.regi_id = regi_id;
     }
 
     @Override
     public String toString() {
         return "PatientCaseHistory{" +
-                "csId='" + csId + '\'' +
-                ", subcribeId='" + subcribeId + '\'' +
-                ", clinicId='" + clinicId + '\'' +
-                ", retime=" + retime +
-                ", hpi='" + hpi + '\'' +
-                ", createTime=" + createTime +
+                "case_id=" + case_id +
+                ", regi_id='" + regi_id + '\'' +
+                ", case_date=" + case_date +
+                ", case_hpi='" + case_hpi + '\'' +
+                ", case_createtime=" + case_createtime +
+                ", subc_id='" + subc_id + '\'' +
+                ", regi_createtime=" + regi_createtime +
+                ", regi_finish=" + regi_finish +
                 '}';
+    }
+
+    public String getCase_hpi() {
+        return case_hpi;
+    }
+
+    public void setCase_hpi(String case_hpi) {
+        this.case_hpi = case_hpi;
+    }
+
+    public LocalDateTime getCase_createtime() {
+        return case_createtime;
+    }
+
+    public void setCase_createtime(LocalDateTime case_createtime) {
+        this.case_createtime = case_createtime;
+    }
+
+    public String getSubc_id() {
+        return subc_id;
+    }
+
+    public void setSubc_id(String subc_id) {
+        this.subc_id = subc_id;
+    }
+
+    public LocalDateTime getRegi_createtime() {
+        return regi_createtime;
+    }
+
+    public void setRegi_createtime(LocalDateTime regi_createtime) {
+        this.regi_createtime = regi_createtime;
+    }
+
+    public Integer getRegi_finish() {
+        return regi_finish;
+    }
+
+    public void setRegi_finish(Integer regi_finish) {
+        this.regi_finish = regi_finish;
     }
 }

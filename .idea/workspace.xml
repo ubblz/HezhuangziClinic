@@ -10,49 +10,151 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34cc76eb-8319-44ed-bdab-4444110bacbd" name="Changes" comment="完成安排和修改就诊">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/ArrangeQueryServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/CancelArrangeServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/ChooseArrangeDoctorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SectorAdminServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SectorModifyServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/sectoradmin.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/sectormodify.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/hezhuangzi/test/ClinicQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/ArrangeQueryServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/CancelArrangeServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/ChooseArrangeDoctorServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SectorModifyServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/sectoradmin.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/HezhuangziClinic/sectormodify.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/ArrangeQueryServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/CancelArrangeServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/ChooseArrangeDoctorServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SectorModifyServlet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/hezhuangzi/test/ClinicQuery.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/coder/ClinicWokerEncoding.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/coder/ClinicWorkerDecoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ArrangeDoctor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/DoctorPatient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/DrugRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/GuidanceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientRegister.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/Sectors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/SubcRegiCasePres.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/listener/ApplictionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/clinic/DoctorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/clinic/GuidanceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/CancelChoseDrugServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/ChooseMethodServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/ChooseSigleDrugServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/GetPatientListServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/GuidanceServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/GuiganceLoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/RegisterSubcribeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SearchDrugServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/WriteCaseHistoryServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/CallPatientServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/DoctorLoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/DoctorServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/EndPatientingServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/FirstSetLastServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/dcotor/PatientingServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/AmPm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/C3P0Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/MySqlDBUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/websocket/InfoDisplay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/websocket/NoticeDoctor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/c3p0-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Test.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/display.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/doctorindex.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/doctorlogin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/doctorvisit.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/erkedisplay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/guidance.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/guidancelogin.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/neikedisplay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/pifukedisplay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/waikedisplay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/wuguankedisplay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/hezhuangzi/test/DBTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/ClinicDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/ClinicDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ArragneDoctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ArragneDoctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/PatientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/dao/PatientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ArragneDoctor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ClinicWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/ClinicWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/OrderDrug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/OrderDrug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientCaseHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientCaseHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientPrescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientPrescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientSubcribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/PatientSubcribe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/entity/SubCasehisPres.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/clinic/ClinicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/clinic/ClinicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/PatientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/ProgressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/ProgressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SubcribeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SubcribeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/AdminLoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/AdminLoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SystemAdminServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SystemAdminServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SectorAdminServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/SectorAdminServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/GetInfoServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/GetPatientInfoServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SelectDoctorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/QuerySubcribeDoctorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SubcribeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/SubcribeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/TestServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/patient/TestServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/MyDBUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/OtherUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hezhuangzi/util/OtherUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/记录.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/记录.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/adminlogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/adminlogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/patientinfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/patientinfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/progress.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/progress.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/sectoradmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/sectoradmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/sectormodify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/sectormodify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/subcribe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/subcribe.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/hezhuangzi/test/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hezhuangzi/test/MyTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/dao/ClinicDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/dao/ClinicDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/ArragneDoctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/ArragneDoctor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/dao/PatientDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/dao/PatientDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/ArragneDoctor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/ClinicWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/ClinicWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/OrderDrug.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/OrderDrug.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientCaseHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientCaseHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientPrescription.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientPrescription.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientSubcribe.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/PatientSubcribe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/entity/SubCasehisPres.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/clinic/ClinicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/clinic/ClinicService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/PatientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/PatientService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/ProgressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/ProgressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/SubcribeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/services/patient/SubcribeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/AdminLoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/AdminLoginServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SystemAdminServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SystemAdminServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/GetInfoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SelectDoctorServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SubDoctorServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SubcribeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/SubcribeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/TestServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/servlet/patient/TestServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/util/MyDBUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/util/OtherUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/com/hezhuangzi/util/OtherUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/记录.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/classes/记录.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/SQL.emmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/excel.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/sectorList.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/settings.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/test.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/workerList.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/upload/医生操作.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/adminlogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/adminlogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/patientinfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/patientinfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/progress.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/progress.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/sectoradmin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/sectoradmin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/sectormodify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/sectormodify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/HezhuangziClinic/subcribe.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/HezhuangziClinic/subcribe.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/dao/ClinicDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/dao/ClinicDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/ArragneDoctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/ArragneDoctor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/dao/PatientDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/dao/PatientDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/ArragneDoctor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/ClinicWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/ClinicWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/OrderDrug.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/OrderDrug.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientCaseHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientCaseHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientPrescription.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientPrescription.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientSubcribe.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/PatientSubcribe.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/entity/SubCasehisPres.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/clinic/ClinicService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/clinic/ClinicService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/PatientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/PatientService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/ProgressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/ProgressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/SubcribeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/services/patient/SubcribeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/AdminLoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/AdminLoginServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/GetExcelFileServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SystemAdminServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SystemAdminServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/clinic/SectorAdminServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/GetInfoServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/SelectDoctorServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/SubcribeDoctorServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/SubcribeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/SubcribeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/TestServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/servlet/patient/TestServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/MyDBUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/OtherUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/hezhuangzi/util/OtherUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/记录.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/记录.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/hezhuangzi/test/MyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/hezhuangzi/test/MyTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,13 +165,23 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Class" />
+        <option value="Enum" />
+        <option value="jsf" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/webapp/progress.jsp" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
@@ -107,7 +219,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../guahao" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.31609195" />
@@ -116,11 +229,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib" />
       <recent name="$PROJECT_DIR$/src/main/webapp" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib" />
       <recent name="$PROJECT_DIR$/src/main/java/com/hezhuangzi" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/webapp" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
       <recent name="$PROJECT_DIR$/src/main/webapp/patient" />
@@ -146,7 +260,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.arrangeIdDoctor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DBTest.dbTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HezhuangziClinic" />
       <extension name="coverage">
         <pattern>
@@ -155,14 +269,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.hezhuangzi.test" />
-      <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.MyTest" />
-      <option name="METHOD_NAME" value="arrangeIdDoctor" />
+      <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.DBTest" />
+      <option name="METHOD_NAME" value="dbTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.queryBreakTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MyTest.DateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HezhuangziClinic" />
       <extension name="coverage">
         <pattern>
@@ -172,13 +286,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.hezhuangzi.test" />
       <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.MyTest" />
-      <option name="METHOD_NAME" value="queryBreakTime" />
+      <option name="METHOD_NAME" value="DateTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.selectDoctor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MyTest.insertTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HezhuangziClinic" />
       <extension name="coverage">
         <pattern>
@@ -188,13 +302,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.hezhuangzi.test" />
       <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.MyTest" />
-      <option name="METHOD_NAME" value="selectDoctor" />
+      <option name="METHOD_NAME" value="insertTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MyTest.queryDate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HezhuangziClinic" />
       <extension name="coverage">
         <pattern>
@@ -204,7 +318,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.hezhuangzi.test" />
       <option name="MAIN_CLASS_NAME" value="com.hezhuangzi.test.MyTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="METHOD_NAME" value="queryDate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -236,12 +350,13 @@
       <method v="2" />
     </configuration>
     <configuration name="Tomcat 8.5.72" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.72" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/HezhuangziClinic_war_exploded/" />
+      <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="HezhuangziClinic:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/HezhuangziClinic_war_exploded" />
+            <option name="CONTEXT_PATH" value="/HezhuangziClinic" />
           </settings>
         </artifact>
       </deployment>
@@ -324,21 +439,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.MyTest.selectDoctor" />
-      <item itemvalue="JUnit.MyTest.arrangeIdDoctor" />
-      <item itemvalue="JUnit.MyTest.test" />
-      <item itemvalue="JUnit.MyTest.queryBreakTime" />
+      <item itemvalue="JUnit.ClinicQuery.query" />
+      <item itemvalue="JUnit.MyTest.DateTest" />
+      <item itemvalue="JUnit.DBTest.dbTest" />
+      <item itemvalue="JUnit.MyTest.queryDate" />
+      <item itemvalue="JUnit.MyTest.insertTest" />
       <item itemvalue="Maven.HezhuangziClinic_run" />
       <item itemvalue="Tomcat Server.Tomcat 8.5.72" />
-      <item itemvalue="JUnit.ClinicQuery.query" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.MyTest.insertTest" />
+        <item itemvalue="JUnit.MyTest.queryDate" />
+        <item itemvalue="JUnit.DBTest.dbTest" />
+        <item itemvalue="JUnit.MyTest.DateTest" />
         <item itemvalue="JUnit.ClinicQuery.query" />
-        <item itemvalue="JUnit.MyTest.test" />
-        <item itemvalue="JUnit.MyTest.queryBreakTime" />
-        <item itemvalue="JUnit.MyTest.arrangeIdDoctor" />
-        <item itemvalue="JUnit.MyTest.selectDoctor" />
       </list>
     </recent_temporary>
   </component>
@@ -357,7 +472,8 @@
       <workItem from="1638973752903" duration="10000" />
       <workItem from="1638975040902" duration="57000" />
       <workItem from="1638976436868" duration="4005000" />
-      <workItem from="1638981680616" duration="35295000" />
+      <workItem from="1638981680616" duration="78913000" />
+      <workItem from="1639148987030" duration="116838000" />
     </task>
     <task id="LOCAL-00001" summary="分层整理成一个">
       <created>1638608398906</created>
@@ -408,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639037123635</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完成安排和修改就诊">
+      <created>1639059523362</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1639059523362</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,11 +567,26 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/PatientService.java</url>
-          <line>122</line>
+          <line>123</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hezhuangzi/services/patient/SubcribeService.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/hezhuangzi/servlet/clinic/CancelChoseDrugServlet.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="58" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.hezhuangzi.entity.Sectors" memberName="doctorPatientList" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
