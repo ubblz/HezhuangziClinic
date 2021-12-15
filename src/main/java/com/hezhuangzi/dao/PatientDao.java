@@ -210,4 +210,16 @@ public class PatientDao {
         List<OrderDrug> orderDrugList = MySqlDBUtil.queryBeanList(sql,params,OrderDrug.class);
         return orderDrugList;
     }
+
+    public Date queryArrangeMaxDate() throws SQLException {
+        String maxSql = "SELECT max(arra_subdate) FROM arrange_doctor";
+        Date max = MySqlDBUtil.queryScalar(maxSql);
+        return max;
+    }
+
+    public int patientRegister(String phone, String pwd) throws SQLException {
+        String patientId = "p"+OtherUtils.getCurrentTimeMillis();
+        String sql = "insert into patient_info(pati_id,pati_phone,pati_pwd) values(?,?,?)";
+        return MySqlDBUtil.insert(sql,new Object[]{patientId,phone,pwd});
+    }
 }

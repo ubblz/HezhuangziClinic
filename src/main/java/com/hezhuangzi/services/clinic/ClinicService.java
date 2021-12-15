@@ -16,32 +16,34 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ClinicService {
     private ClinicDao dao = new ClinicDao();
+    public static final String ADMIN = "admin";
 
 
     public void adminLogin(HttpServletRequest request, HttpServletResponse response) {
         String clinicId = request.getParameter("clinicid");
         String pwd = request.getParameter("pwd");
         String admintype = request.getParameter("admintype");
+        HttpSession session = request.getSession(true);
         System.out.println(clinicId);
         System.out.println(pwd);
         System.out.println(admintype);
         //查询并保存 登录管理员的信息
 
         try {
-            ClinicWorker worker = dao.queryAdminInfo(clinicId,pwd,admintype);
+            ClinicWorker worker = dao.queryAdminInfo(clinicId, pwd, admintype);
             System.out.println(worker);
-            if(worker != null){
+            if (worker != null) {
                 String typ = worker.getClin_type();
                 System.out.println(typ);
-                switch (typ){
+                switch (typ) {
                     case "sysadmin":
                         response.sendRedirect("systemadmin");
                         break;
@@ -53,9 +55,10 @@ public class ClinicService {
                         response.sendRedirect("sectoradmin");
                         break;
                 }
+                session.setAttribute(ADMIN,worker);
             }else{
-                request.setAttribute("msg","帐号密码错误！");
-                request.getRequestDispatcher("adminlogin.jsp").forward(request,response);
+                request.setAttribute("msg", "帐号密码错误！");
+                request.getRequestDispatcher("adminlogin.jsp").forward(request, response);
             }
         } catch (SQLException | IOException | ServletException e) {
             e.printStackTrace();
@@ -75,7 +78,7 @@ public class ClinicService {
         //获取目录对象
         File file = new File(savePath);
         //判断目录是否存在，不存在就创建
-        if(!file.exists() && !file.isFile()){
+        if (!file.exists() && !file.isFile()) {
             file.mkdir();
         }
 
@@ -85,14 +88,14 @@ public class ClinicService {
             DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
             upload.setHeaderEncoding("UTF-8");
-            if(!ServletFileUpload.isMultipartContent(request)){
-                return ;
+            if (!ServletFileUpload.isMultipartContent(request)) {
+                return;
             }
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem fileItem : list) {
                 if (fileItem.isFormField()) {
 
-                }else{
+                } else {
                     //自定义文件名字
 //                    String fileName = fileItem.getName();
 //                    System.out.println(fileName);
@@ -101,11 +104,11 @@ public class ClinicService {
 //                    }
 //                    fileName = fileName.substring(fileName.lastIndexOf("\\"))
                     InputStream in = fileItem.getInputStream();
-                    FileOutputStream outputStream = new FileOutputStream(savePath+"/"+"excel.xlsx");
+                    FileOutputStream outputStream = new FileOutputStream(savePath + File.separator + "workerexcel.xlsx");
                     byte[] buffer = new byte[1024];
                     int len = 0;
-                    while((len=in.read(buffer)) != -1){
-                        outputStream.write(buffer,0,len);
+                    while ((len = in.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, len);
                     }
                     in.close();
                     outputStream.close();
@@ -116,29 +119,41 @@ public class ClinicService {
 
         } catch (FileUploadException | IOException e) {
             e.printStackTrace();
-            Map<String,String> result = new HashMap<>();
-            result.put("msg","error");
+            Map<String, String> result = new HashMap<>();
+            result.put("msg", "error");
             out.println(JSON.toJSONString(result));
             return;
         }
-
 
         /*
          * 下面是导入数据库！ 检查格式
          * */
 
         String path = servletContext.getRealPath("/WEB-INF/upload");
-        String fileName = path+ File.separator+ "excel.xlsx";
+        String fileName = path + File.separator + "workerexcel.xlsx";
         String finalMsg = msg;
-        EasyExcel.read(fileName, ClinicWorker.class,new PageReadListener<ClinicWorker>(dataList ->{
-            Map<String,Object> result = new HashMap<>();
-            try {
-                dao.addExcelData(dataList);
-                result.put("msg",finalMsg);
-                result.put("data",dataList);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                result.put("msg","error");
+        EasyExcel.read(fileName, ClinicWorker.class, new PageReadListener<ClinicWorker>(dataList -> {
+            int count = 0;
+            boolean success = true;
+            Map<String, Object> result = new HashMap<>();
+            List<ClinicWorker> errorList = new ArrayList<>();
+            for (ClinicWorker clinicWorker : dataList) {
+                try {
+                    dao.addExcelOneData(clinicWorker);
+//                    dao.addExcelData(dataList);
+                } catch (Exception e) {
+                    count++;
+                    success = false;
+                    errorList.add(clinicWorker);
+                    e.printStackTrace();
+                }
+            }
+            if (!success) {
+                result.put("result", 2);
+                result.put("data", errorList);
+                result.put("count",count);
+            } else {
+                result.put("msg", 1);
             }
             out.println(JSON.toJSONString(result));
         })).sheet().doRead();
@@ -153,16 +168,16 @@ public class ClinicService {
         System.out.println(sector);
         System.out.println(time);
         PrintWriter out = null;
-        Map<String,Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         try {
             out = response.getWriter();
-            List<ClinicWorker> workers = dao.queryArrange(date,sector,time);
-            result.put("msg","success");
-            result.put("data",workers);
+            List<ClinicWorker> workers = dao.queryArrange(date, sector, time);
+            result.put("msg", "success");
+            result.put("data", workers);
             out.println(JSON.toJSONString(result));
         } catch (SQLException | IOException e) {
             e.printStackTrace();
-            result.put("msg","success");
+            result.put("msg", "success");
             out.println(JSON.toJSONString(result));
         }
     }
@@ -184,8 +199,8 @@ public class ClinicService {
         String msg = "";
         try {
             out = response.getWriter();
-            int count = dao.arrangeOneDoctor(clinicId,date,ampm,subnum);
-            msg = count > 0 ?"success":"error";
+            int count = dao.arrangeOneDoctor(clinicId, date, ampm, subnum);
+            msg = count > 0 ? "success" : "error";
         } catch (SQLException | IOException e) {
             msg = "error";
             e.printStackTrace();
@@ -199,16 +214,17 @@ public class ClinicService {
 //        String name = request.getParameter("cname");
 //        String time = request.getParameter("time");
 
-        request.setAttribute("cancelResult",request.getParameterValues("cancelResult"));
+        request.setAttribute("cancelResult", request.getParameterValues("cancelResult"));
         try {
-            List<ArrangeDoctor> list = dao.queryArrangeDoctor();
-            if(!list.isEmpty()){
-                request.setAttribute("arrangeDoctorList",list);
+            String mondayDate = OtherUtils.getMondayDate(OtherUtils.getMonDayCount());
+            List<ArrangeDoctor> list = dao.queryArrangeDoctor(mondayDate);
+            if (!list.isEmpty()) {
+                request.setAttribute("arrangeDoctorList", list);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.getRequestDispatcher("sectormodify.jsp").forward(request,response);
+        request.getRequestDispatcher("sectormodify.jsp").forward(request, response);
     }
 
     public void cancelArrange(HttpServletRequest request, HttpServletResponse response) {
@@ -220,9 +236,9 @@ public class ClinicService {
 
         try {
             out = response.getWriter();
-            if(dao.cancelArrangeDoctor(arrangeId) > 0){
+            if (dao.cancelArrangeDoctor(arrangeId) > 0) {
                 msg = "success";
-            }else{
+            } else {
                 msg = "error";
             }
         } catch (SQLException | IOException e) {
@@ -240,9 +256,9 @@ public class ClinicService {
 //        System.out.println(startData);
 //        System.out.println(endData);
 
-        request.setAttribute("startData",startData);
-        request.setAttribute("endDate",endData);
+        request.setAttribute("startData", startData);
+        request.setAttribute("endDate", endData);
 
-        request.getRequestDispatcher("sectoradmin.jsp").forward(request,response);
+        request.getRequestDispatcher("sectoradmin.jsp").forward(request, response);
     }
 }

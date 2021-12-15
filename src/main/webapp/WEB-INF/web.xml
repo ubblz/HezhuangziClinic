@@ -1,33 +1,106 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<!--<!DOCTYPE web-app PUBLIC-->
+<!-- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"-->
+<!-- "http://java.sun.com/dtd/web-app_2_3.dtd" >-->
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
 
-<!--  <servlet>-->
-<!--    <servlet-name>SignUpServelt</servlet-name>-->
-<!--    <servlet-class>com.hezhuangzi.servlet.patient.RegisterServlet</servlet-class>-->
-<!--  </servlet>-->
+    <!--  <servlet>-->
+    <!--    <servlet-name>SignUpServelt</servlet-name>-->
+    <!--    <servlet-class>com.hezhuangzi.servlet.patient.RegisterServlet</servlet-class>-->
+    <!--  </servlet>-->
 
-<!--  <servlet-mapping>-->
-<!--    <servlet-name>SignUpServelt</servlet-name>-->
-<!--    <url-pattern>/hezhuangzi/SignIn</url-pattern>-->
-<!--  </servlet-mapping>-->
+    <!--  <servlet-mapping>-->
+    <!--    <servlet-name>SignUpServelt</servlet-name>-->
+    <!--    <url-pattern>/hezhuangzi/SignIn</url-pattern>-->
+    <!--  </servlet-mapping>-->
 
-<!--  <servlet>-->
-<!--    <servlet-name>LoginServlet</servlet-name>-->
-<!--    <servlet-class>com.hezhuangzi.servlet.patient.LoginServlet</servlet-class>-->
-<!--  </servlet>-->
+    <!--  <servlet>-->
+    <!--    <servlet-name>LoginServlet</servlet-name>-->
+    <!--    <servlet-class>com.hezhuangzi.servlet.patient.PatientLoginServlet</servlet-class>-->
+    <!--  </servlet>-->
 
-<!--  <servlet-mapping>-->
-<!--    <servlet-name>LoginServlet</servlet-name>-->
-<!--    <url-pattern>/hezhuangzi/Login</url-pattern>-->
-<!--  </servlet-mapping>-->
+    <!--  <servlet-mapping>-->
+    <!--    <servlet-name>LoginServlet</servlet-name>-->
+    <!--    <url-pattern>/hezhuangzi/Login</url-pattern>-->
+    <!--  </servlet-mapping>-->
 
-  <welcome-file-list>
-    <welcome-file>erkedisplay.jsp</welcome-file>
-  </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
 
+    <!-- 检查患者用户是否已登录 -->
+    <filter>
+        <filter-name>PatientFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.PatientFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PatientFilter</filter-name>
+<!--        <url-pattern>/patientlogin.jsp</url-pattern>-->
+        <url-pattern>/progress</url-pattern>
+        <url-pattern>/progress.jsp</url-pattern>
+        <url-pattern>/patientinfo</url-pattern>
+        <url-pattern>/patientinfo.jsp</url-pattern>
+        <url-pattern>/subcribe</url-pattern>
+        <url-pattern>/subcribe.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>DoctorFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.DoctorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DoctorFilter</filter-name>
+        <url-pattern>/doctor</url-pattern>
+        <url-pattern>/doctorindex.jsp</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>GuidanceFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.GuidanceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>GuidanceFilter</filter-name>
+        <url-pattern>/guidance</url-pattern>
+        <url-pattern>/guidance.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/systemadmin</url-pattern>
+        <url-pattern>/systemadmin.jsp</url-pattern>
+        <url-pattern>/sectoradmin</url-pattern>
+        <url-pattern>/sectoradmin.jsp</url-pattern>
+        <url-pattern>/sectormodify</url-pattern>
+        <url-pattern>/sectormodify.jsp</url-pattern>
+        <url-pattern>/getsector</url-pattern>
+        <url-pattern>/getsector.jsp</url-pattern>
+        <url-pattern>/getdrug.jsp</url-pattern>
+        <url-pattern>/getdrug</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>DrugFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.DrugFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DrugFilter</filter-name>
+        <url-pattern>/drugdoctor</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>InfusionFilter</filter-name>
+        <filter-class>com.hezhuangzi.filter.InfusionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>InfusionFilter</filter-name>
+        <url-pattern>/infusiondoctor</url-pattern>
+    </filter-mapping>
 
 </web-app>

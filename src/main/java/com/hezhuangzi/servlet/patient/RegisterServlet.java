@@ -1,6 +1,8 @@
 package com.hezhuangzi.servlet.patient;
 
 
+import com.hezhuangzi.services.patient.PatientService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,10 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PatientService service = new PatientService();
+        service.patientRegister(request,response);
+
 
     }
 }

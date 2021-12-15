@@ -31,8 +31,8 @@ public class GuidanceService {
         try {
             ClinicWorker guidance = dao.clinicWorkerLogin(clinicId,pwd,type);
             if(guidance!=null){
-                HttpSession session = request.getSession();
-                session.setAttribute("guidance",guidance);
+                HttpSession session = request.getSession(true);
+                session.setAttribute(GUIDANCE,guidance);
                 response.sendRedirect("guidance");
             }else{
                 String msg = "帐号密码错误，登陆失败！";
@@ -47,7 +47,7 @@ public class GuidanceService {
     }
 
     public void guidanceIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         String type = ((ClinicWorker)session.getAttribute(GUIDANCE)).getClin_type();
         String sector = "";
         String guidanceType = "";
@@ -90,7 +90,7 @@ public class GuidanceService {
 
     public void guidanceRegister(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) throws ServletException, IOException {
         String subcribeId = request.getParameter("subcribeid");
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         ClinicWorker guidance = (ClinicWorker)session.getAttribute(GuidanceService.GUIDANCE);
         String clinId =guidance.getClin_id();
         String sector = chooseSector(guidance.getClin_type());
@@ -108,12 +108,9 @@ public class GuidanceService {
                     doctorPatient.getRegisterList().addLast(patientRegister);
                     NoticeDoctor doctor = new NoticeDoctor();
                     doctor.onMessage(JSON.toJSONString(ApplictionListener.getAllSectorPatient()));
-
                     //发送给显示屏
                     InfoDisplay.getTypeData(InfoDisplay.INFO,ApplictionListener.getAllSectorPatient());
-
                 }
-
 //                DoctorPatient doctorPatient = OtherUtils.getDoctorPatient(servletContext, request);
 //                NoticeDoctor doctor = new NoticeDoctor();
 //                doctor.onMessage(JSON.toJSONString(doctorPatient));

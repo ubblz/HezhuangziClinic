@@ -27,8 +27,11 @@ public class FirstSetLastServlet extends HttpServlet {
 //        List<Sectors> doctorPatient = ApplictionListener.getAllSectorPatient();
 //        out.println(JSON.toJSONString(doctorPatient));
         List<Sectors> sectorsList = OtherUtils.setFristToLast(request);
+
+        //发送给医生
         NoticeDoctor doctor = new NoticeDoctor();
         doctor.onMessage(JSON.toJSONString(sectorsList));
+        //发送给显示屏
         InfoDisplay.getTypeData(InfoDisplay.INFO,ApplictionListener.getAllSectorPatient());
     }
 }

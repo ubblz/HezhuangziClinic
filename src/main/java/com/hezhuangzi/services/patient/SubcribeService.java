@@ -3,6 +3,7 @@ package com.hezhuangzi.services.patient;
 import com.alibaba.fastjson.JSON;
 import com.hezhuangzi.dao.PatientDao;
 import com.hezhuangzi.entity.*;
+import com.hezhuangzi.servlet.patient.PatientLoginServlet;
 import com.hezhuangzi.util.AmPm;
 import com.hezhuangzi.util.OtherUtils;
 import sun.text.resources.cldr.lg.FormatData_lg;
@@ -45,33 +46,55 @@ public class SubcribeService {
     }
 
     public void displaySubcribe(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            MinMaxDate minMaxDate = dao.getSubMinMaxDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date nowDate = new Date();
-            if(minMaxDate.getMinDate().compareTo(nowDate) > 0){
-                request.setAttribute("min",minMaxDate.getMinDate().toString());
-                request.setAttribute("max",minMaxDate.getMaxDate().toString());
-            }else{
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTime(nowDate);
-                calendar.add(calendar.DATE,1); //把日期往后增加一天,整数  往后推,负数往前移动
-                nowDate = calendar.getTime(); //这个时间就是日期往后推一天的结果
-                String nowDateStr = sdf.format(nowDate);
-                request.setAttribute("min",nowDateStr);
-                request.setAttribute("max",minMaxDate.getMaxDate().toString());
-            }
+        /*
+        * 1. 找出最大的可以预约的日期
+        * 2. 然后对比现在的日期，比当前日期小则无预约信息。
+        * 3. 只能预约第二天的。
+        * */
 
-            if(nowDate.compareTo(minMaxDate.getMaxDate()) == 0 ){
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTime(nowDate);
-                calendar.add(calendar.DATE,2); //把日期往后增加一天,整数  往后推,负数往前移动
-                nowDate = calendar.getTime(); //这个时间就是日期往后推一天的结果
-                String nowDateStr = sdf.format(nowDate);
-                request.setAttribute("max",nowDateStr);
-                request.setAttribute("min",minMaxDate.getMaxDate().toString());
+        try {
+            HttpSession session = request.getSession(true);
+            PatientInfo patientInfo = (PatientInfo) session.getAttribute(PatientService.SESSION_PATIENT);
+            if(patientInfo.getPati_getInfo()== null || patientInfo.getPati_getInfo() == 0){
+                request.setAttribute("noInfo",true);
+            }
+            Date subcribeMax = dao.queryArrangeMaxDate();
+            Date nowDate = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            if(subcribeMax != null && subcribeMax.compareTo(nowDate) > 0 && subcribeMax.compareTo(nowDate) != 0){
+                String maxStr = sdf.format(subcribeMax);
+                String nowStr = sdf.format(nowDate);
+                request.setAttribute("min",nowStr);
+                request.setAttribute("max",maxStr);
+                request.setAttribute("noSubcribe",true);
+            }else{
+                request.setAttribute("noSubcribe",false);
             }
             request.getRequestDispatcher("subcribe.jsp").forward(request,response);
+//            MinMaxDate minMaxDate = dao.getSubMinMaxDate();
+//            if(minMaxDate.getMinDate().compareTo(nowDate) > 0){
+//                request.setAttribute("min",minMaxDate.getMinDate().toString());
+//                request.setAttribute("max",minMaxDate.getMaxDate().toString());
+//            }else{
+//                Calendar calendar = new GregorianCalendar();
+//                calendar.setTime(nowDate);
+//                calendar.add(calendar.DATE,1); //把日期往后增加一天,整数  往后推,负数往前移动
+//                nowDate = calendar.getTime(); //这个时间就是日期往后推一天的结果
+//                String nowDateStr = sdf.format(nowDate);
+//                request.setAttribute("min",nowDateStr);
+//                request.setAttribute("max",minMaxDate.getMaxDate().toString());
+//            }
+//
+//            if(nowDate.compareTo(minMaxDate.getMaxDate()) == 0 ){
+//                Calendar calendar = new GregorianCalendar();
+//                calendar.setTime(nowDate);
+//                calendar.add(calendar.DATE,2); //把日期往后增加一天,整数  往后推,负数往前移动
+//                nowDate = calendar.getTime(); //这个时间就是日期往后推一天的结果
+//                String nowDateStr = sdf.format(nowDate);
+//                request.setAttribute("max",nowDateStr);
+//                request.setAttribute("min",minMaxDate.getMaxDate().toString());
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ServletException e) {
@@ -93,7 +116,7 @@ public class SubcribeService {
         Map<String,Integer> result = new HashMap<>();
         out = response.getWriter();
         try {
-            HttpSession seesion = request.getSession();
+            HttpSession seesion = request.getSession(true);
             String arrangeId = request.getParameter("arrangeId");
             System.out.println(arrangeId);
             String patiId = ((PatientInfo) seesion.getAttribute("patientInfo")).getPati_id();

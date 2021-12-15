@@ -1,0 +1,157 @@
+*{
+    box-sizing: border-box;
+}
+h1{
+    margin:0;
+    padding:0;
+}
+
+.main{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    min-height: 900px;
+    border-radius: 10px;
+    border: 5px solid #5975d3;
+}
+.header{
+    position: absolute;
+    top:10px;
+    left: 10px;
+}
+
+.header h1{
+    display: inline-block;
+    position: relative;
+    top:-20px;
+}
+
+.title{
+    padding:20px 0 20px 0;
+    font-size: 3em;
+    letter-spacing:8px;
+    text-align: center;
+    border-bottom: 3px solid #5959ea;
+}
+
+#pay-form{
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+}
+
+#pay-form span,.pres-main .pres-info span{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#pay-form button{
+    padding: 5px 20px 5px 20px;
+    color: white;
+    background-color: #3a2d2d;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#pay-form button:hover{
+    cursor: pointer;
+}
+
+#pay-form input{
+    height: 32px;
+    border-radius: 5px;
+    margin-left: 27px;
+    margin-right: 27px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.display{
+    margin-top:20px;
+    /*text-align: center;*/
+    width: 50%;
+    margin:0 auto;
+}
+
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.display .info *{
+    /*display: inline-block;*/
+}
+.display .info h3{
+    /*margin-right:70px;*/
+}
+
+.display .info span{
+    color: #439be3;
+}
+
+.pres-main .pres-info span{
+    color: #439be3;
+}
+.pres-main .pres-info{
+    font-size: 1em;
+}
+
+.pres-main{
+    /*text-align: ;*/
+}
+
+.pres-id{
+    color: black!important;
+    font-weight: bold;
+    font-size: 1.5em!important;
+}
+
+/*.pay-table{*/
+/*    width: 100%;*/
+/*    !*text-align: center!important;*!*/
+/*}*/
+
+/*.pay-table tr{*/
+/*    height: 30px;*/
+/*    text-align: center;*/
+/*}*/
+
+.pay-table{
+    width: 100%;
+    border:1px solid black;
+}
+.pay-table tr{
+    /*border:1px solid black;*/
+    text-align: center;
+}
+.pay-table td,th{
+    border: 1px solid black;
+}
+
+.price{
+    font-size:1.3em;
+    font-weight: bold;
+}
+.confirm-paybtn{
+    padding:20px 0 20px 0;
+    text-align: center;
+}
+
+.confirm-paybtn button{
+    padding:7px 28px 7px 28px;
+    background-color: #3a2d2d;
+    border:none;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0 50px 0 50px;
+    border-radius: 3px;
+}
+
+.confirm-paybtn button:hover{
+    cursor: pointer;
+}
+
+.pay-success{
+    font-weight: bold;
+    font-size: 2em;
+}

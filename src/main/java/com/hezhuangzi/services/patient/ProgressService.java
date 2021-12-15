@@ -28,19 +28,26 @@ public class ProgressService {
 
         try {
             int start = 0; //开始是0 到 偏移
+
             if (request.getParameter("start") != null) {
                 start = Integer.parseInt(request.getParameter("start"));
             }
+
             request.setAttribute("start",start);
+
             //获取当前用户信息
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(true);
             String patientId = ((PatientInfo)session.getAttribute("patientInfo")).getPati_id();
+
             //查询用户所有的subcribeId
             List<PatientSubcribe> subcribeList = dao.getPatientAllSubcribe(patientId);
-            if(subcribeList.size() == 0){
-                request.setAttribute("patientProgress",null);
-            }else {
+
+//            if(subcribeList.size() == 0){
+//                request.setAttribute("patientProgress",null);
+//            }else {
                 //下一记录
+            if(subcribeList != null && !subcribeList.isEmpty() && start < subcribeList.size() && start > -1){
+
                 if (subcribeList.size() > 1 && start + 1 < subcribeList.size()) {
                     request.setAttribute("next", true);
                 }
@@ -49,29 +56,38 @@ public class ProgressService {
                     request.setAttribute("pre", true);
                 }
 
+                PatientSubcribe subcribe = subcribeList.get(start);
                 SubcRegiCasePres subcRegiCasePres = new SubcRegiCasePres();
-                subcRegiCasePres.setPatientSubcribe(subcribeList.get(start));
+                subcRegiCasePres.setPatientSubcribe(subcribe); // 设置病人的预约单
 
-
-                //判断取消的
-                if(subcribeList.get(start).getSubc_cancel() == 0 && subcribeList.get(start).getSubc_finish() == 0 ){
+                //判断 取消预约按钮  subc_cancel = 0 并且 subc_finish 未完成
+                if(subcribe.getSubc_cancel() == 0 && subcribe.getSubc_finish() == 0){
                     request.setAttribute("cancel", true);
                 }
 
-                Date breakDate = subcribeList.get(start).getArra_subdate();
-                String breakAmpm = subcribeList.get(start).getArra_ampm();
+                //查询是否有有 爽约的
+                Date breakDate = subcribe.getArra_subdate();
+                String breakAmpm = subcribe.getArra_ampm();
+
                 if(!OtherUtils.queryBreakTimeDate(breakDate,breakAmpm)){
+                    //爽约的是 没取消预约 并且 没完成的 预约单 ，所以取消按钮得小时。
                     request.setAttribute("cancel",false);
+                    // 显示爽约信息。
                     request.setAttribute("breakTime",true);
                 }
 
-                if (subcribeList.get(start).getSubc_finish() == 1) {
-                    PatientRegister register = dao.getPatientRegister(subcribeList.get(start).getSubc_id());
+                if (subcribe.getSubc_finish() == 1) {
+                    //查找出对应的挂号单
+                    PatientRegister register = dao.getPatientRegister(subcribe.getSubc_id());
+                    //设置进一整个进度里
                     subcRegiCasePres.setPatientRegister(register);
-                    if ( register.getRegi_finish() == 1) {
+
+                    if (register.getRegi_finish() == 1) {
+
                         PatientCaseHistory history = dao.getPatientCaseHistory(register.getRegi_id());
                         PatientPrescription prescription = dao.getPatientPrescription(register.getRegi_id());
                         List<OrderDrug> orderDrugList = dao.getOrderDrug(prescription.getPres_id());
+
                         subcRegiCasePres.setPatientCaseHistory(history);
                         subcRegiCasePres.setPatientPrescription(prescription);
                         subcRegiCasePres.setOrderDrugList(orderDrugList);

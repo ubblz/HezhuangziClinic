@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Test</h1>
+<button onclick="tiaozhuang()">跳转</button>
+<script>
+    function tiaozhuang(){
+        window.location.replace("adminlogin.jsp");
+    }
+</script>
 </body>
 </html>

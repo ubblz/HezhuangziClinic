@@ -18,6 +18,8 @@ import java.util.List;
 public class DoctorService {
     private ClinicDao dao = new ClinicDao();
     public static final String DOCTOR = "doctor";
+    public static final String DRUG_DOCTOR = "drugdoctor";
+    public static final String INFUSION_DOCTOR = "infusiondoctor";
 
     public void doctorLogin(HttpServletRequest request, HttpServletResponse response) {
         String clinicId = request.getParameter("clinicid");
@@ -26,18 +28,25 @@ public class DoctorService {
         try {
             ClinicWorker doctor = dao.clinicWorkerLogin(clinicId,pwd,type);
             if(doctor!=null){
-                HttpSession session = request.getSession();
-                session.setAttribute(DOCTOR,doctor);
-                request.getRequestDispatcher("doctor").forward(request,response);
+                HttpSession session = request.getSession(true);
+                if(type.equals("drug")){
+                    response.sendRedirect("drugdoctor");
+                    session.setAttribute(DRUG_DOCTOR,doctor);
+                }else if(type.equals("infusion")){
+                    response.sendRedirect("infusiondoctor");
+                    session.setAttribute(INFUSION_DOCTOR,doctor);
+                }else{
+                    response.sendRedirect("doctor");
+                    session.setAttribute(DOCTOR,doctor);
+                }
             }else{
                 String msg = "帐号密码错误，登陆失败！";
                 request.setAttribute("msg",msg);
                 request.getRequestDispatcher("doctorlogin.jsp").forward(request,response);
             }
-        } catch (SQLException | ServletException | IOException e) {
+        } catch (SQLException | IOException | ServletException e) {
             e.printStackTrace();
         }
-
     }
 
     public void doctorIndex(HttpServletRequest request, HttpServletResponse response, ServletContext application) throws ServletException, IOException {

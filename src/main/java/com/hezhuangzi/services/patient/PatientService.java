@@ -3,6 +3,7 @@ package com.hezhuangzi.services.patient;
 import com.alibaba.fastjson.JSON;
 import com.hezhuangzi.dao.PatientDao;
 import com.hezhuangzi.entity.PatientInfo;
+import com.hezhuangzi.util.OtherUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,8 @@ import java.util.Map;
 
 public class PatientService {
     private PatientDao dao = new PatientDao();
-
-    public void successLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public static final String SESSION_PATIENT = "patientInfo";
+    public void patientLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         //获取phone 和 手机号。
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("pwd");
@@ -26,15 +27,12 @@ public class PatientService {
             PatientInfo patientInfo = dao.patientLogin(phone,pwd);
             if(patientInfo != null){
                 //patienInfo 为登陆用户的信息
-                session.setAttribute("patientInfo",patientInfo);
-//                String patientId = patientInfo.getPatientId();
-//                session.setAttribute("phone",phone);
-//                session.setAttribute("patientId",patientId);
+                session.setAttribute(PatientService.SESSION_PATIENT,patientInfo);
                 System.out.println("登陆成功!");
                 response.sendRedirect("patientinfo");
             }else{
                 System.out.println("登陆失败!");
-                request.getRequestDispatcher("login.jsp").forward(request,response);
+                request.getRequestDispatcher("patientlogin.jsp").forward(request,response);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -53,7 +51,7 @@ public class PatientService {
         * */
 
         response.setContentType("application/json;charset=utf-8");
-        HttpSession seesion = request.getSession();
+        HttpSession seesion = request.getSession(true);
         PatientInfo patientInfo =  (PatientInfo) seesion.getAttribute("patientInfo");
         try {
             PrintWriter out = response.getWriter();
@@ -73,7 +71,7 @@ public class PatientService {
 
     public void modifyPatientInfo(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         PatientInfo patientInfo = (PatientInfo) session.getAttribute("patientInfo");
         if(patientInfo != null){
             String name = request.getParameter("modifyname");
@@ -102,7 +100,7 @@ public class PatientService {
 
 //        response.setContentType("application/json");
         //获取当前用户的信息
-//        HttpSession session = request.getSession();
+//        HttpSession session = request.getSession(true);
 //        PatientInfo patientInfo = (PatientInfo) session.getAttribute("patientInfo");
 //
 //        if(patientInfo != null){
@@ -130,7 +128,7 @@ public class PatientService {
     }
 
     public void displayPatientInfo(HttpServletRequest request, HttpServletResponse response) {
-//        HttpSession session = request.getSession();
+//        HttpSession session = request.getSession(true);
 //        PatientInfo patientInfo = (PatientInfo) session.getAttribute("patientInfo");
 //        if(patientInfo != null){
 ////            String phone = (String) session.getAttribute("phone");
@@ -156,5 +154,23 @@ public class PatientService {
             e.printStackTrace();
         }
 
+    }
+
+    public void patientRegister(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String phone = request.getParameter("phone");
+        String pwd = request.getParameter("pwd");
+        String msg = "";
+        try {
+            if (dao.patientRegister(phone,pwd)>0) {
+                msg = "注册成功！";
+            }else{
+                msg = "注册失败！";
+            }
+        } catch (Exception e) {
+            msg = "注册失败！";
+            e.printStackTrace();
+        }
+        request.setAttribute("msg",msg);
+        request.getRequestDispatcher("register.jsp").forward(request,response);
     }
 }

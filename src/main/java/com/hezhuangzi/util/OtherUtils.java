@@ -63,29 +63,26 @@ public class OtherUtils {
         return weekDays[w];
     }
 
+    public static Date addOneDate(Date date){
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+        return calendar.getTime();
+    }
+
     public static int getMonDayCount() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date nowDate = new Date();
         int count = 0;
-        while (!OtherUtils.dateToWeek(simpleDateFormat.format(nowDate)).equals("星期一")) {
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(nowDate);
-            calendar.add(Calendar.DATE, 1);
-            count++;
-            nowDate = calendar.getTime();
+        if(OtherUtils.dateToWeek(simpleDateFormat.format(nowDate)).equals("星期一")){
+            nowDate = addOneDate(nowDate);
         }
-//        System.out.println(count);
-        return count;
+        while (!OtherUtils.dateToWeek(simpleDateFormat.format(nowDate)).equals("星期一")) {
+            nowDate = addOneDate(nowDate);
+            count++;
+        }
+        return ++count;
     }
-
-    public static Date addDay(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, 1);
-        date = calendar.getTime();
-        return date;
-    }
-
 
     public static Date getSunDay(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -248,7 +245,7 @@ public class OtherUtils {
     public static DoctorPatient getDoctorPatient(ServletContext servletContext, HttpServletRequest request){
         List<Sectors> attribute = (List<Sectors>) servletContext.getAttribute(ApplictionListener.SECTOR);
 //        NoticeDoctor noticeDoctor = new NoticeDoctor();
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         ClinicWorker d = (ClinicWorker)session.getAttribute(DoctorService.DOCTOR);
         for (Sectors sectors : attribute) {
             if(sectors.getSector().equals(d.getClin_type())){
@@ -262,6 +259,30 @@ public class OtherUtils {
         }
         return null;
     }
+
+    public static DoctorPatient setDoctorPatientNull(ClinicWorker clinicWorker){
+        List<Sectors> attribute = (List<Sectors>) ApplictionListener.getAllSectorPatient();
+//        NoticeDoctor noticeDoctor = new NoticeDoctor();
+        for (int i = 0; i < attribute.size(); i++) {
+            if(attribute.get(i).getSector().equals(clinicWorker.getClin_type())){
+
+            }
+        }
+        for (Sectors sectors : attribute) {
+            if(sectors.getSector().equals(clinicWorker.getClin_type())){
+                for (DoctorPatient doctorPatient : sectors.getDoctorPatientList()) {
+                    if(doctorPatient.getDoctor().getClin_id().equals(clinicWorker.getClin_id())){
+//                        noticeDoctor.onMessage(JSON.toJSONString(doctorPatient));
+                        sectors.getDoctorPatientList().remove(doctorPatient);
+                        break;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
 
     //查看医生是否在线
     public static DoctorPatient toRegisterGetDoctorPatient(PatientRegister register){
@@ -282,8 +303,10 @@ public class OtherUtils {
 
     public static List<Sectors> setFristToLast(HttpServletRequest request){
         List<Sectors> allSectorPatient = ApplictionListener.getAllSectorPatient();
-        HttpSession session = request.getSession();
+
+        HttpSession session = request.getSession(true);
         ClinicWorker d = (ClinicWorker)session.getAttribute(DoctorService.DOCTOR);
+
         for (Sectors sectors : allSectorPatient) {
             if(sectors.getSector().equals(d.getClin_type())){
                 for (DoctorPatient doctorPatient : sectors.getDoctorPatientList()) {

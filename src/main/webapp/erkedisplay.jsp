@@ -11,6 +11,7 @@
 <head>
     <title>儿科室显示屏</title>
     <link rel="stylesheet" href="css/display.css">
+    <link rel="icon" type="image/png" href="https://pic.imgdb.cn/item/61b497192ab3f51d910ba7e0.png" />
 </head>
 <body>
 

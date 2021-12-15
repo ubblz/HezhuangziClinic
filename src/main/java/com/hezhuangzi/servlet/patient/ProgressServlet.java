@@ -11,7 +11,6 @@ import java.io.IOException;
 public class ProgressServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         ProgressService service = new ProgressService();
         service.displayProgress(request,response);
     }

@@ -18,6 +18,13 @@ public class ClinicDao {
         return worker;
     }
 
+    public int addExcelOneData(ClinicWorker worker) throws SQLException {
+        String sql = "insert into clinic_worker(clin_id,clin_name,clin_gen,clin_birth,clin_age,clin_post,clin_pic,clin_phone,clin_type,clin_pwd) values(?,?,?,?,?,?,?,?,?,?)";
+        Object[] params = {worker.getClin_id(),worker.getClin_name(),worker.getClin_gen(), OtherUtils.dateConvert(worker.getClin_birth()),worker.getClin_age(),
+                worker.getClin_post(),worker.getClin_pic(),worker.getClin_phone(),worker.getClin_type(),worker.getClin_pwd()};
+        return MySqlDBUtil.insert(sql,params);
+    }
+
     public void addExcelData(List<ClinicWorker> dataList) throws SQLException {
         String sql = "insert into clinic_worker(clin_id,clin_name,clin_gen,clin_birth,clin_age,clin_post,clin_pic,clin_phone,clin_type,clin_pwd) values(?,?,?,?,?,?,?,?,?,?)";
         for (ClinicWorker worker : dataList) {
@@ -46,12 +53,12 @@ public class ClinicDao {
         return effect;
     }
 
-    public List<ArrangeDoctor> queryArrangeDoctor() throws SQLException {
+    public List<ArrangeDoctor> queryArrangeDoctor(String dateStr) throws SQLException {
         String sql = "select *  from arrange_doctor as a " +
                 "INNER JOIN clinic_worker as c " +
-                "on a.clin_id = c.clin_id ";
-//        Object[] params = {};
-        List<ArrangeDoctor> list = MySqlDBUtil.queryBeanList(sql, ArrangeDoctor.class);
+                "on a.clin_id = c.clin_id and arra_subdate >= ?";
+        Object[] params = {dateStr};
+        List<ArrangeDoctor> list = MySqlDBUtil.queryBeanList(sql,params,ArrangeDoctor.class);
         return list;
     }
 
@@ -123,14 +130,14 @@ public class ClinicDao {
         return effect;
     }
 
-    public int writeCaseHistory(String regiId, String hpi) throws SQLException {
-        String sql = "insert into patient_casehistory(regi_id,case_hpi) values(?,?)";
-        Object[] params = {regiId,hpi};
+    public int writeCaseHistory(String regiId, String hpi,String date) throws SQLException {
+        String sql = "insert into patient_casehistory(regi_id,case_hpi,case_date) values(?,?,?)";
+        Object[] params = {regiId,hpi,date};
         return MySqlDBUtil.insert(sql,params);
     }
 
     public List<DrugRepository> searchDrugRepository(String drugName) throws SQLException {
-        String sql = "select * from drug_repository where drug_name like '%"+drugName+"%'";
+        String sql = "select * from drug_repository where drug_num > 0 and drug_name like '%"+drugName+"%'";
         Object[] params = {drugName};
         List<DrugRepository> list = MySqlDBUtil.queryBeanList(sql,DrugRepository.class);
         return  list;
@@ -192,7 +199,7 @@ public class ClinicDao {
     }
 
     public int updateCancelDrugNum(OrderDrug num) throws SQLException {
-        int choseNum = num.getDrug_num();
+        int choseNum = num.getOrder_num();
         int drugId = num.getDrug_id();
         String sql = "update drug_repository set drug_num = drug_num + ? where drug_id = ?";
         return MySqlDBUtil.update(sql,new Object[]{choseNum,drugId});
@@ -207,5 +214,94 @@ public class ClinicDao {
                 "ON subc.arra_id = arra.arra_id AND arra.clin_id = arra.clin_id AND subc.pati_id = pati.pati_id AND arra.clin_id = clin.clin_id AND regi.subc_id = subc.subc_id and regi.subc_id = ?";
         PatientRegister patientRegister = MySqlDBUtil.queryBean(sql,new Object[]{subcId},PatientRegister.class);
         return patientRegister;
+    }
+
+    public PatientRegister queryRegisterInfo(String registerId) throws SQLException {
+        String sql = "SELECT * FROM patient_subcribe AS subc " +
+                "INNER JOIN arrange_doctor AS arra " +
+                "INNER JOIN patient_info AS pati " +
+                "INNER JOIN clinic_worker AS clin " +
+                "INNER JOIN patient_register AS regi " +
+                "ON subc.arra_id = arra.arra_id AND arra.clin_id = arra.clin_id AND subc.pati_id = pati.pati_id AND arra.clin_id = clin.clin_id AND regi.subc_id = subc.subc_id and regi.regi_id  = ?";
+        return MySqlDBUtil.queryBean(sql,new Object[]{registerId},PatientRegister.class);
+    }
+
+    public PatientPrescription queryPatientPrescription(String registerId) throws SQLException {
+        String sql = "select * from patient_prescription where regi_id = ? and pres_finish = 0";
+        return MySqlDBUtil.queryBean(sql,new Object[]{registerId},PatientPrescription.class);
+    }
+
+    public List<OrderDrug> queryPresOrederDrugs(String pres_id) throws SQLException {
+        String sql = "select * from order_drug as o,drug_repository as d where d.drug_id = o.drug_id and  pres_id = ?";
+        return MySqlDBUtil.queryBeanList(sql,new Object[]{pres_id},OrderDrug.class);
+    }
+
+    public int patientConfirmPay(String presId) throws SQLException {
+        String sql = "update patient_prescription set pres_pay = 1 where pres_id = ?";
+        return MySqlDBUtil.update(sql,new Object[]{presId});
+    }
+
+    public List<PatientPrescription> queryAlreadyPayPres(int i) throws SQLException {
+        String sql = "SELECT * FROM patient_subcribe AS subc " +
+                "INNER JOIN arrange_doctor AS arra " +
+                "INNER JOIN patient_info AS pati " +
+                "INNER JOIN clinic_worker AS clin " +
+                "INNER JOIN patient_register AS regi " +
+                "INNER JOIN patient_prescription as pres " +
+                "ON subc.arra_id = arra.arra_id AND " +
+                "arra.clin_id = arra.clin_id AND " +
+                "subc.pati_id = pati.pati_id AND " +
+                "arra.clin_id = clin.clin_id AND " +
+                "regi.subc_id = subc.subc_id AND " +
+                "pres.regi_id = regi.regi_id AND " +
+                "pres.pres_pay = 1 AND pres.pres_finish = 0 AND pres.pres_choose = ?";
+        return MySqlDBUtil.queryBeanList(sql,new Object[]{i},PatientPrescription.class);
+    }
+
+    public int confirmDrug(String registerId, String inRegisterId) throws SQLException {
+        String sql = "update patient_prescription set pres_finish = 1 where regi_id = ?";
+        return MySqlDBUtil.update(sql,new Object[]{registerId});
+    }
+
+    public List<ClinicWorker> queryAllClniciInfo() throws SQLException {
+        String sql = "select * from clinic_worker";
+        return MySqlDBUtil.queryBeanList(sql,ClinicWorker.class);
+    }
+
+    public int systemDeleteWorker(String clinicId) throws SQLException {
+        String sql = "delete from clinic_worker where clin_id = ?";
+        return MySqlDBUtil.delete(sql,new Object[]{clinicId});
+    }
+
+    public List<ClinicSector> queryAllSectorInfo() throws SQLException {
+        String sql = "select * from clinic_sector";
+        return MySqlDBUtil.queryBeanList(sql,ClinicSector.class);
+    }
+
+    public int systemDeleteSector(String clinicId) throws SQLException {
+        String sql = "delete from clinic_sector where sect_type = ?";
+        return MySqlDBUtil.delete(sql,new Object[]{clinicId});
+    }
+
+    public int addExcelSectorOneData(ClinicSector clinicSector) throws SQLException {
+        String sql = "insert into clinic_sector(sect_type,sect_sector) values(?,?)";
+        Object[] params = {clinicSector.getSect_type(),clinicSector.getSect_sector()};
+        return MySqlDBUtil.insert(sql,params);
+    }
+
+    public List<DrugRepository> queryAllDrugInfo() throws SQLException {
+        String sql = "select * from drug_repository";
+        return MySqlDBUtil.queryBeanList(sql,DrugRepository.class);
+    }
+
+    public int systemDeleteDrug(String drugId) throws SQLException {
+        String sql = "delete from drug_repository where drug_id = ?";
+        return MySqlDBUtil.delete(sql,new Object[]{drugId});
+    }
+
+    public int addExcelDrugOneData(DrugRepository drugRepository) throws SQLException {
+        String sql = "insert into drug_repository(drug_id,drug_name,drug_price,drug_num) values(?,?,?,?)";
+        Object[] params = {drugRepository.getDrug_id(),drugRepository.getDrug_name(),drugRepository.getDrug_price(),drugRepository.getDrug_num()};
+        return MySqlDBUtil.insert(sql,params);
     }
 }

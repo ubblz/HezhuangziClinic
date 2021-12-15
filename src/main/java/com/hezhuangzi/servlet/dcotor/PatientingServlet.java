@@ -34,12 +34,12 @@ public class PatientingServlet extends HttpServlet {
         DoctorPatient doctorPatient = OtherUtils.getDoctorPatient(getServletContext(), request);
         LinkedList<PatientRegister> patientList = doctorPatient.getRegisterList();
         PatientRegister patientInfo = patientList.removeFirst();
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         ClinicWorker doctor = (ClinicWorker) session.getAttribute(DoctorService.DOCTOR);
         String clinicId = doctor.getClin_id();
         ClinicDao dao = new ClinicDao();
         PrintWriter out = response.getWriter();
-        doctorPatient.setPatienting(patientInfo);
+        doctorPatient.setPatienting(patientInfo);//设置正在就诊
         String msg = "success";
         try {
             if(dao.registerFinish(patientInfo.getRegi_id())>0){

@@ -1,97 +1,98 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: hhrx
+  Date: 2021/12/14
+  Time: 下午6:43
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!DOCTYPE html>
-<html lang="en">
+<%@ page isELIgnored="false" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>何庄子诊所</title>
+    <title>患者注册</title>
+    <title>注册 - 何庄子诊所</title>
+    <link rel="icon" type="image/png" href="https://pic.imgdb.cn/item/61b497192ab3f51d910ba7e0.png"/>
 
-    <!-- General CSS Files -->
-    <link rel="icon" type="image/png" href="assets/img/icons/favicon.ico"/>
-
-    <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
-
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="assets/modules/jquery-selectric/selectric.css">
-
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/components.css">
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
 </head>
-
 <body>
-<div id="app">
-    <section class="section">
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-                    <div class="login-brand">
-                        <span>注册</span>
-                    </div>
-                    <div class="card card-primary">
-                        <div class="card-body">
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col mt-2">
+                <a class="text-decoration-none text-dark" href="">
+                    <h2 class="card-title">
+                        <img src="https://pic.imgdb.cn/item/61b497192ab3f51d910ba7e0.png"
+                             style="width: 60px; height: 60px;">
+                        <b class="card-title" style="color: rgb(45, 133, 168);">何庄子诊所</b>
+                        <span class="card-title">欢迎注册</span>
+                    </h2>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
-                            <form method="POST">
-                                <div class="form-group">
-                                    <label for="tel">手机号</label>
-                                    <input id="tel" type="tel" class="form-control" name="tel">
-                                    <div class="invalid-feedback">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="password" class="d-block">密码</label>
-                                        <input id="password" type="password" class="form-control pwstrength"
-                                               data-indicator="pwindicator" name="password" maxlength="18">
-                                        <div id="pwindicator" class="pwindicator">
-                                            <div class="bar"></div>
-                                            <div class="label"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="password2" class="d-block">确认密码</label>
-                                        <input id="password2" type="password" class="form-control"
-                                               name="password-confirm" maxlength="18">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                        注册
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="mt-5 text-muted text-center">
-                                <a href="login.jsp">返回</a>
-                            </div>
-                        </div>
+<div class="container border rounded shadow">
+    <div class="row mt-3">
+        <label class="col text-center text-black-50">没有账号？创建您的账户。</label>
+    </div>
+    <div class="row mt-2">
+        <div class="col-4"></div>
+        <form class="col-4" action="register" method="post" >
+            <div class="reg-box">
+                <div class="row">
+                    <div class="col mb-3">
+                        <i class="bi bi-phone"></i>
+                        <label for="">手机号</label>
+                        <input type="text" class="form-control phone" id="tel" maxlength="11" name="phone"
+                               placeholder="请输入手机号" onBlut="textBlur(this)" onFocus="textFocus(this)" required>
+                        <span class="text-black-50 error error1"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <i class="bi bi-lock"></i>
+                        <label for="">密码</label>
+                        <input type="password" class="form-control password" id="password" name="pwd"
+                               placeholder="请输入密码" maxlength="18" onblur="textBlur(this)" onfocus="textFocus(this)"
+                               required>
+                        <span class="text-black-50 error error3"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <i class="bi bi-lock"></i>
+                        <label>确认密码</label>
+                        <input type="password" class="form-control email" id="" placeholder="请再次输入密码"
+                               onblur="textBlur(this)" onfocus="textFocus(this)" required>
+                        <span class="text-black-50 error error3"></span>
                     </div>
                 </div>
             </div>
+            <div class="text-center mt-3 mb-3">
+                <button class="btn btn-primary shadow col" type="submit">注册</button>
+            </div>
+
+        </form>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <h4>${msg}</h4>
         </div>
-    </section>
+    </div>
+    <div class=" text-center mt-3 mb-3">
+        <a href="patientlogin.jsp" class="card-link text-black-50">返回</a>
+    </div>
 </div>
 
-<!-- General JS Scripts -->
-<script src="assets/modules/jquery.min.js"></script>
-<script src="assets/modules/popper.js"></script>
-<script src="assets/modules/tooltip.js"></script>
-<script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-<script src="assets/modules/moment.min.js"></script>
-<script src="assets/js/stisla.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- JS Libraies -->
-<script src="assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-<script src="assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<script src="assets/js/login_register.js"></script>
 
-<!-- Page Specific JS File -->
-<script src="assets/js/page/auth-register.js"></script>
-
-<!-- Template JS File -->
-<script src="assets/js/scripts.js"></script>
-<script src="assets/js/custom.js"></script>
 </body>
 </html>
